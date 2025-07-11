@@ -1,4 +1,3 @@
-```blade
 <!doctype html>
 <html lang="en">
 <head>
@@ -246,9 +245,8 @@
   
 
     <!-- Vite-bundled admin.js -->
-   {{-- 
     @vite(['resources/js/admin.js'])
-   --}}
+
 
 
 
@@ -854,4 +852,3 @@
     @stack('scripts')
 </body>
 </html>
-```
