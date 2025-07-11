@@ -1,4 +1,6 @@
-this is admin dashboard
+@extends('admin.layout.master')
+@section('content')
+    this is admin dashboard
   <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -8,3 +10,4 @@ this is admin dashboard
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+@endsection

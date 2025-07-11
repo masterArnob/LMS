@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
 Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+Route::post('logout', [AdminDashboardController::class, 'destroy'])
+        ->name('logout');
 });
 
 
