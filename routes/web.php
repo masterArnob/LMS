@@ -6,6 +6,8 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\StudentDashboardController;
+use App\Http\Controllers\Student\StudentProfileController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,6 +46,7 @@ Route::get('dashboard', [InstructorDashboardController::class, 'dashboard'])->na
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function(){
+Route::resource('profile', StudentProfileController::class);
 Route::get('dashboard', [StudentDashboardController::class, 'dashboard'])->name('dashboard');
 });
 

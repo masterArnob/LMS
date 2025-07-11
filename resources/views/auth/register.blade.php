@@ -142,39 +142,103 @@
                         {{-- for student --}}
 
 
+
                         {{-- for instructor --}}
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                             aria-labelledby="pills-profile-tab" tabindex="0">
-                            <form action="{{ route('register') }}" method="POST">
+                            <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                     <input type="hidden" name="register_for" value="instructor">
                                 <h2>Sign Up<span>!</span></h2>
                                 <p class="new_user">Already have an account? <a href="sign_in.html">Sign In</a></p>
                                 <div class="row">
-                                    <div class="col-xl-12">
+                                    <div class="col-xl-6">
                                         <div class="wsus__login_form_input">
-                                            <label>First name</label>
-                                            <input type="text" placeholder="First name">
+                                            <label>Image</label>
+                                            <input type="file" class="form-control" name="image">
+                                            @error('image')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-xl-12">
+
+                                     <div class="col-xl-6">
                                         <div class="wsus__login_form_input">
-                                            <label>Last name</label>
-                                            <input type="text" placeholder="Last name">
+                                            <label>Document</label>
+                                            <input type="file" class="form-control" name="document">
+                                              @error('document')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
+
+
+                                    <div class="col-xl-6">
+                                        <div class="wsus__login_form_input">
+                                            <label>Name</label>
+                                            <input type="text" placeholder="Name" name="name">
+                                                 @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
+                                       <div class="col-xl-6">
+                                        <div class="wsus__login_form_input">
+                                            <label>Contact</label>
+                                            <input type="tel" name="contact" placeholder="Your contact">
+                                                @error('contact')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
+
                                     <div class="col-xl-12">
                                         <div class="wsus__login_form_input">
                                             <label>Your email</label>
-                                            <input type="email" placeholder="Your email">
+                                            <input type="email" name="email" placeholder="Your email">
+                                                @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
+
+
+
+
+                                   
+
                                     <div class="col-xl-12">
                                         <div class="wsus__login_form_input">
                                             <label>Password</label>
-                                            <input type="password" placeholder="Your password">
+                                            <input type="password" name="password" placeholder="Your password">
+                                               @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
+
+
+                                    <div class="col-xl-12">
+                                        <div class="wsus__login_form_input">
+                                            <label>Confirm Password</label>
+                                            <input id="password_confirmation" type="password"
+                                                name="password_confirmation" required placeholder="Your password">
+
+
+
+                                            @error('password_confirmation')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+
+
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-xl-12">
                                         <div class="wsus__login_form_input">
                                         

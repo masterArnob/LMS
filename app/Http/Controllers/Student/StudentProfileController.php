@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use File;
 use Illuminate\Validation\Rules\Password;
-class AdminProfileController extends Controller
+use File;
+use Illuminate\Support\Facades\Auth;
+
+class StudentProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
-        return view('admin.profile.edit');
+        return view('student.profile.edit');
     }
 
     /**
@@ -46,7 +45,7 @@ class AdminProfileController extends Controller
      */
     public function edit(string $id)
     {
-        
+        //
     }
 
     /**
@@ -72,22 +71,16 @@ class AdminProfileController extends Controller
                    
                     $file = $request->image;
                     $file_name = rand() . $file->getClientOriginalName();
-                    $file->move(public_path('/uploads/admin_images/'), $file_name);
-                    $user->image = '/uploads/admin_images/' . $file_name;
+                    $file->move(public_path('/uploads/student_images/'), $file_name);
+                    $user->image = '/uploads/student_images/' . $file_name;
                 }
 
                 $user->name = $request->name;
                 $user->email = $request->email;
                 $user->contact = $request->contact;
                 $user->address = $request->address;
-                $user->headline = $request->headline;
-                $user->bio = $request->bio;
                 $user->gender = $request->gender;
-                $user->facebook = $request->facebook;
-                $user->x = $request->x;
-                $user->linkedin = $request->linkedin;
-                $user->website = $request->website;
-                $user->github = $request->github;
+               
                 $user->save();
                 notyf()->success('Your profile has been updated.');
                 return redirect()->back();

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-
+use File;
 class RegisteredUserController extends Controller
 {
     /**
@@ -56,7 +56,49 @@ class RegisteredUserController extends Controller
 
                 break;
             case 'instructor':
-                dd('Registering as instructor');
+                 //dd('Registering as instructor');
+                  $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                    'contact' => ['required'],
+                    'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+                    'document' => ['required', 'mimes:pdf,doc,docx'],
+                ]);
+               
+
+                $image = null;
+                $document = null;
+                if ($request->has('image')) {
+                    $file = $request->image;
+                    $file_name = rand() . $file->getClientOriginalName();
+                    $file->move(public_path('/uploads/admin_images/'), $file_name);
+                    $image = '/uploads/instructor_images/' . $file_name;
+                }
+
+                 if ($request->has('document')) {
+                    $file = $request->document;
+                    $file_name = rand() . $file->getClientOriginalName();
+                    $file->move(public_path('/uploads/admin_images/'), $file_name);
+                    $document = '/uploads/instructor_images/' . $file_name;
+                }
+
+                  $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'role' => 'student',
+                    'status' => 'active',
+                    'image' => $image,
+                    'document' => $document,
+                    'contact' => $request->contact,
+                    'approve_status' => 'pending'
+                ]);
+
+                event(new Registered($user));
+
+                Auth::login($user);
+                return to_route('student.dashboard');
                 break;
         }
 
