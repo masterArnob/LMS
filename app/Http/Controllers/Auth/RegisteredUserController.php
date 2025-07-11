@@ -29,21 +29,38 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        //dd($request->all());
+        switch ($request->register_for) {
+            case 'student':
+                //dd('Registering as student');
+                $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                ]);
 
-        event(new Registered($user));
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'role' => 'student',
+                    'status' => 'active',
+                    'approve_status' => 'pending'
+                ]);
 
-        Auth::login($user);
+                event(new Registered($user));
+
+                Auth::login($user);
+                return to_route('student.dashboard');
+
+                break;
+            case 'instructor':
+                dd('Registering as instructor');
+                break;
+        }
+
+
 
         return redirect(route('dashboard', absolute: false));
     }

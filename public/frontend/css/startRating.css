@@ -1,0 +1,20 @@
+#starRating {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+#starRating li {
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+    color: var(--paraColor);
+    cursor: pointer;
+}
+
+#starRating li.active,
+#starRating li.hover {
+    color: orange;
+}
