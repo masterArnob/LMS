@@ -29,6 +29,14 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'contact' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'bio' => fake()->paragraph(),
+            'role' => fake()->randomElement(['admin', 'instructor', 'student']),
+            'image' => 'uploads/default-files/avatar.png',
+            'approve_status' => fake()->randomElement(['pending', 'approved', 'rejected', 'banned']),
+            'status' => fake()->randomElement(['active', 'inactive', 'banned']),
+
         ];
     }
 

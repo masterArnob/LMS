@@ -13,10 +13,27 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->enum('role', ['admin', 'instructor', 'student']);
+            $table->string('image')->default('uploads/default-files/avatar.png');
             $table->string('name');
+            $table->string('contact')->nullable();
+            $table->string('headline')->nullable();
             $table->string('email')->unique();
+            $table->string('address')->nullable();
+            $table->text('bio')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->string('document')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('facebook')->nullable();
+            $table->string('x')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('website')->nullable();
+            $table->string('github')->nullable();
+            $table->enum('approve_status', ['pending', 'approved', 'rejected', 'banned'])->default('pending');
+            $table->enum('login_as', ['admin', 'student', 'instructor'])->nullable();
+            $table->double('wallet')->default(0);
+            $table->enum('status', ['active', 'inactive', 'banned'])->default('active');
             $table->rememberToken();
             $table->timestamps();
         });

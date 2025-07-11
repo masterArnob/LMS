@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckRoleMiddleware;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
@@ -20,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth' => Authenticate::class,
             'guest' => RedirectIfAuthenticated::class,
             'cors' => HandleCors::class, // Add alias for 'cors'
-           // 'check_role' => RoleMiddleware::class,
+            'check_role' => CheckRoleMiddleware::class,
         ]);
         // Explicitly assign the VerifyCsrfToken middleware to the web group
         $middleware->web(append: [
