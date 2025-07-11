@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\StudentDashboardController;
 use App\Http\Controllers\Student\StudentProfileController;
@@ -41,12 +42,19 @@ Route::post('logout', [AdminDashboardController::class, 'destroy'])
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'], function(){
-Route::get('dashboard', [InstructorDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::resource('profile', InstructorProfileController::class);
+Route::post('logout', [InstructorDashboardController::class, 'destroy'])
+        ->name('logout');
+    Route::get('dashboard', [InstructorDashboardController::class, 'dashboard'])->name('dashboard');
+
 });
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function(){
+
 Route::resource('profile', StudentProfileController::class);
+Route::post('logout', [StudentDashboardController::class, 'destroy'])
+        ->name('logout');
 Route::get('dashboard', [StudentDashboardController::class, 'dashboard'])->name('dashboard');
 });
 
