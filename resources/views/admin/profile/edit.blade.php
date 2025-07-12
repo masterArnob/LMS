@@ -18,8 +18,8 @@
 
 
                          <div class="row align-items-center">
-                            <div class="col-auto"><span class="avatar avatar-xl"
-                                    style="background-image: url({{ asset(Auth::user()->image) }})" id="showImage"></span>
+                            <div class="col-auto">
+                                <img id="showImage" src="{{ asset(Auth::user()->image) }}" class="avatar avatar-xl">
                             </div>
 
                         

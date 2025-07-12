@@ -3,14 +3,29 @@
     
 
     <!--===========================
-        BANNER 3 START
+        HERO SECTION START
     ============================-->
 
-    @include('frontend.sections.banner')
+    @include('frontend.sections.hero-section')
     <!--===========================
-        BANNER 3 END
+       HERO SECTION END
     ============================-->
 
+
+
+        <!--===========================
+        FEATURES SECTION START
+    ============================-->
+
+    @include('frontend.sections.features-section')
+    <!--===========================
+       FEATURES SECTION END
+    ============================-->
+
+
+
+    {{-- 
+    
 
     <!--===========================
         CATEGORY 4 START
@@ -110,4 +125,6 @@
     <!--===========================
         BLOG 4 END
     ============================-->
+    
+    --}}
 @endsection
