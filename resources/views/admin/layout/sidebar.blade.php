@@ -202,8 +202,8 @@
                         Course Languages 
                       </a>
 
-                      <a class="dropdown-item" href="#">
-                        Request to be vendor
+                      <a class="dropdown-item" href="{{ route('admin.course-level.index') }}">
+                        Course Levels
                       </a>
              
 
