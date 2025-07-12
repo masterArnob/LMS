@@ -12,6 +12,31 @@
 
 
 
+     $(document).on("change", "#image_one", function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#showImage_one").attr("src", e.target.result);
+            };
+            reader.readAsDataURL(e.target.files[0]);
+});
+     $(document).on("change", "#image_two", function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#showImage_two").attr("src", e.target.result);
+            };
+            reader.readAsDataURL(e.target.files[0]);
+});
+     $(document).on("change", "#image_three", function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#showImage_three").attr("src", e.target.result);
+            };
+            reader.readAsDataURL(e.target.files[0]);
+});
+
+
+
+
 
 var notyf = new Notyf();
 

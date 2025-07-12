@@ -1,29 +1,33 @@
-     <ul class="wsus__banner_features d-flex flex-wrap">
+@if (!empty($feature))
+    <ul class="wsus__banner_features d-flex flex-wrap">
             <li class="green wow fadeInRight">
                 <div class="icon">
-                    <img src="images/banner_feature_icon_1.png" alt="Features" class="img-fluid">
+                    <img src="{{ asset($feature->image_one) }}" alt="Features" class="img-fluid">
                 </div>
                 <div class="text">
-                    <h4>Learn From Experts</h4>
-                    <p>LMS allows users to create organize and manage courses.</p>
+                    <h4>{{ $feature->title_one }}</h4>
+                    <p>{{ $feature->subtitle_one }}</p>
                 </div>
             </li>
             <li class="pink wow fadeInRight">
                 <div class="icon">
-                    <img src="images/banner_feature_icon_2.png" alt="Features" class="img-fluid">
+                    <img src="{{ $feature->image_two }}" alt="Features" class="img-fluid">
                 </div>
                 <div class="text">
-                    <h4>Earn a Certificate</h4>
-                    <p>LMS allows users to create organize and manage courses.</p>
+                    <h4>{{ $feature->title_two }}</h4>
+                    <p>{{ $feature->subtitle_two }}</p>
                 </div>
             </li>
             <li class="sky wow fadeInRight">
                 <div class="icon">
-                    <img src="images/banner_feature_icon_3.png" alt="Features" class="img-fluid">
+                    <img src="{{ asset($feature->image_three) }}" alt="Features" class="img-fluid">
                 </div>
                 <div class="text">
-                    <h4>5400+ Courses</h4>
-                    <p>LMS allows users to create organize and manage courses.</p>
+                    <h4>{{ $feature->title_three }}</h4>
+                    <p>{{ $feature->subtitle_three }}</p>
                 </div>
             </li>
         </ul>
+@else
+    Please add features in the admin panel.
+@endif

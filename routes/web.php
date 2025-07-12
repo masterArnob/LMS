@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CourseLevelController;
 use App\Http\Controllers\Admin\CourseSubCategoryController;
+use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -38,7 +39,9 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
 
-    Route::resource('sub-category', CourseSubCategoryController::class);
+Route::resource('features', FeaturesController::class);
+
+Route::resource('sub-category', CourseSubCategoryController::class);
 
 Route::resource('category', CourseCategoryController::class);
 

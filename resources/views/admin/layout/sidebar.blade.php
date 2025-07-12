@@ -214,6 +214,9 @@
                          <a class="dropdown-item" href="{{ route('admin.sub-category.index') }}">
                         Course Sub Category
                       </a>
+
+
+
              
 
 
@@ -242,8 +245,8 @@
                         Hero Section 
                       </a>
 
-                      <a class="dropdown-item" href="#">
-                        Request to be vendor
+                      <a class="dropdown-item" href="{{ route('admin.features.index') }}">
+                        Feature Section
                       </a>
              
 
