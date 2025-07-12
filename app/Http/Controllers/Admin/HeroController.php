@@ -52,55 +52,52 @@ class HeroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //dd($request->all());
-        $request->validate([
-            'title' => ['required', 'string'],
-            'subtitle' => ['required', 'string'],
-        ]);
+public function update(Request $request, string $id)
+{
+    $request->validate([
+        'title' => ['required', 'string'],
+        'subtitle' => ['required', 'string'],
+    ]);
 
-        $hero = HeroSection::first();
-        $image = null;
-        if ($request->has('image')) {
-            if (!empty($hero)) {
-                if (File::exists(public_path($hero->image))) {
-                    File::delete(public_path($hero->image));
-                }
-            }
-
-
-            $file = $request->image;
-            $file_name = rand() . $file->getClientOriginalName();
-            $file->move(public_path('/uploads/admin_images/'), $file_name);
-            $image = '/uploads/admin_images/' . $file_name;
-        }else{
-            $image = $hero->image;
+    $hero = HeroSection::first();
+    $image = null;
+    
+    if ($request->hasFile('image')) {
+        // Delete old image if exists
+        if (!empty($hero) && !empty($hero->image) && File::exists(public_path($hero->image))) {
+            File::delete(public_path($hero->image));
         }
 
-
-
-        HeroSection::updateOrCreate(
-            ['id' => $id],
-            [
-                'label' => $request->label,
-                'title' => $request->title,
-                'subtitle' => $request->subtitle,
-                'button_text' => $request->button_text,
-                'button_url' => $request->button_url,
-                'video_button_text' => $request->video_button_text,
-                'video_button_url' => $request->video_button_url,
-                'banner_item_title' => $request->banner_item_title,
-                'banner_item_subtitle' => $request->banner_item_subtitle,
-                'round_text' => $request->round_text,
-                'image' => $image,
-            ]
-        );
-
-
-        notyf()->success('Hero section has been updated successfully.');
-        return redirect()->back();
+        // Upload new image
+        $file = $request->file('image');
+        $file_name = rand() . $file->getClientOriginalName();
+        $file->move(public_path('/uploads/admin_images/'), $file_name);
+        $image = '/uploads/admin_images/' . $file_name;
+    } else {
+        // Use existing image if available, otherwise keep it null (or set a default)
+        $image = $hero ? $hero->image : null;
     }
+
+    HeroSection::updateOrCreate(
+        ['id' => $id],
+        [
+            'label' => $request->label,
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
+            'button_text' => $request->button_text,
+            'button_url' => $request->button_url,
+            'video_button_text' => $request->video_button_text,
+            'video_button_url' => $request->video_button_url,
+            'banner_item_title' => $request->banner_item_title,
+            'banner_item_subtitle' => $request->banner_item_subtitle,
+            'round_text' => $request->round_text,
+            'image' => $image,
+        ]
+    );
+
+    notyf()->success('Hero section has been updated successfully.');
+    return redirect()->back();
+}
 
     /**
      * Remove the specified resource from storage.
