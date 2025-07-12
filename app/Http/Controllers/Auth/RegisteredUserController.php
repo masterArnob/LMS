@@ -72,14 +72,14 @@ class RegisteredUserController extends Controller
                 if ($request->has('image')) {
                     $file = $request->image;
                     $file_name = rand() . $file->getClientOriginalName();
-                    $file->move(public_path('/uploads/admin_images/'), $file_name);
+                    $file->move(public_path('/uploads/instructor_images/'), $file_name);
                     $image = '/uploads/instructor_images/' . $file_name;
                 }
 
                  if ($request->has('document')) {
                     $file = $request->document;
                     $file_name = rand() . $file->getClientOriginalName();
-                    $file->move(public_path('/uploads/admin_images/'), $file_name);
+                    $file->move(public_path('/uploads/instructor_images/'), $file_name);
                     $document = '/uploads/instructor_images/' . $file_name;
                 }
 

@@ -96,9 +96,9 @@
             </a>
         </li>
         <li>
-            <form method="POST" action="{{ route('student.logout') }}">
+            <form method="POST" action="{{ route('instructor.logout') }}">
                 @csrf
-                <a href="{{ route('student.logout') }}" onclick="event.preventDefault();
+                <a href="{{ route('instructor.logout') }}" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                     <div class="img">
                         <img src="{{ asset('uploads/default-files/dash_icon_16.png') }}" alt="icon"

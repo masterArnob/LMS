@@ -249,6 +249,7 @@
     <!--===========================
         DASHBOARD OVERVIEW END
     ============================-->
-
+   <!-- Vite-bundled admin.js -->
+   
 
 @endsection

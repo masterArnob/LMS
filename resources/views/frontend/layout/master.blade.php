@@ -131,6 +131,13 @@
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
+     @vite(['resources/js/instructor.js'])
+
+        <!-- Vite-bundled admin.js -->
+    @vite(['resources/js/student.js'])
+
+
+    
     @stack('scripts')
 </body>
 
