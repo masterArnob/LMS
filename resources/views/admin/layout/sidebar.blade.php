@@ -210,6 +210,10 @@
                         <a class="dropdown-item" href="{{ route('admin.category.index') }}">
                         Course Category
                       </a>
+
+                         <a class="dropdown-item" href="{{ route('admin.sub-category.index') }}">
+                        Course Sub Category
+                      </a>
              
 
 
