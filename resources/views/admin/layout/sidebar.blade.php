@@ -250,6 +250,9 @@
                       </a>
              
 
+                         <a class="dropdown-item" href="{{ route('admin.about-section.index') }}">
+                        About Section
+                      </a>
 
 
                 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\CourseCategoryController;
@@ -38,6 +39,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
+
+Route::resource('about-section', AboutSectionController::class);
 
 Route::resource('features', FeaturesController::class);
 

@@ -29,5 +29,5 @@
             </li>
         </ul>
 @else
-    Please add features in the admin panel.
+    <p class="text-center">Please add features in the admin panel.</p>
 @endif
