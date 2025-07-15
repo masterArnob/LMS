@@ -52,7 +52,17 @@
                   <div class="col-xl-6">
                       <div class="add_course_basic_info_imput upload_source">
                           <label for="#">Path</label>
-                          <input type="file" name="path" class="source_input ">
+                         
+                          <div class="input-group">
+                              <span class="input-group-btn">
+                                  <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                      class="btn btn-primary">
+                                      <i class="fa fa-picture-o"></i> Choose
+                                  </a>
+                              </span>
+                              <input id="thumbnail" class="form-control source_input" type="text" name="path">
+                          </div>
+                       
                           @error('path')
                               <span class="text-danger">{{ $message }}</span>
                           @enderror
@@ -101,22 +111,8 @@
           </form>
       </div>
   </div>
-@push('scripts')
-    <script>
-        $(document).ready(function () {
-    // show hide path input depending on source
-    $(document).on('change', '.storage', function () {
-        let value = $(this).val();
-        $('.source_input').val('');
-        console.log("working");
-        if (value == 'upload') {
-            $('.upload_source').removeClass('d-none');
-            $('.external_source').addClass('d-none');
-        } else {
-            $('.upload_source').addClass('d-none');
-            $('.external_source').removeClass('d-none');
-        }
-    });
-})
-    </script>
-@endpush
+  @push('scripts')
+      <script>
+           $('#lfm').filemanager('file');
+      </script>
+  @endpush

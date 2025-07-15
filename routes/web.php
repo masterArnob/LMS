@@ -67,6 +67,15 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'], function () {
 
+
+
+
+     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+     \UniSharp\LaravelFilemanager\Lfm::routes();
+ });
+
+
+
     /**
      * Course Routes
      */

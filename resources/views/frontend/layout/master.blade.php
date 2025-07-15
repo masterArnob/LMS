@@ -140,6 +140,13 @@
     <!--wow js-->
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
 
+
+
+
+     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+
+
+     
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 

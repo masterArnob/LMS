@@ -46,3 +46,19 @@ $(document).on('submit', '.basic-info-form', function(e){
 })
 
 
+
+          $(document).ready(function() {
+              // show hide path input depending on source
+              $(document).on('change', '.storage', function() {
+                  let value = $(this).val();
+                  $('.source_input').val('');
+                  console.log("working");
+                  if (value == 'upload') {
+                      $('.upload_source').removeClass('d-none');
+                      $('.external_source').addClass('d-none');
+                  } else {
+                      $('.upload_source').addClass('d-none');
+                      $('.external_source').removeClass('d-none');
+                  }
+              });
+          })

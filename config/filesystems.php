@@ -47,6 +47,15 @@ return [
             'report' => false,
         ],
 
+
+
+       'lfm_public' => [
+        'driver' => 'local',
+        'root' => public_path('uploads'),  // Points to `/public/uploads`
+        'url' => env('APP_URL') . '/uploads', // Accessible via URL
+        'visibility' => 'public',
+    ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

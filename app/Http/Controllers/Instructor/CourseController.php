@@ -41,7 +41,7 @@ class CourseController extends Controller
 
                 $source = null;
                 if($request->demo_video_storage === 'upload'){
-                    $source = 'upload file not working right now';
+                    $source = $request->path;
                 }else{
                     $source = $request->url;
                 }
