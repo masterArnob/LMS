@@ -32,7 +32,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-md-4 wow fadeInLeft">
-                    @include('student.layout.sidebar')
+                    @include('instructor.layout.sidebar')
                 </div>
                 <div class="col-xl-9 col-md-8 wow fadeInRight">
                     <div class="wsus__dashboard_contant">

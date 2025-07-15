@@ -6,6 +6,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <title>EduCore </title>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
@@ -27,6 +30,15 @@
     <link rel=" stylesheet" href="{{ asset('frontend/css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+
+
+        <!-- Notyf CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+    <!-- Summernote Lite CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+
 </head>
 
 <body class="home_3">
@@ -131,12 +143,31 @@
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
+       <!-- Notyf JS -->
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+    <!-- Summernote Lite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+    
+
      @vite(['resources/js/instructor.js'])
 
         <!-- Vite-bundled admin.js -->
     @vite(['resources/js/student.js'])
 
-
+<script>
+    
+            var config = {
+            routes: {
+                storeBasicInfo: "{{ route('instructor.course.storeBasicInfo') }}",
+            },
+           // icon: {
+            //    currency_icon: "{{ $settings->currency_icon ?? '$' }}",
+           //  }
+     
+        };
+</script>
     
     @stack('scripts')
 </body>

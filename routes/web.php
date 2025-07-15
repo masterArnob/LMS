@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Instructor\CourseController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorProfileController;
 use App\Http\Controllers\ProfileController;
@@ -38,47 +39,58 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
+Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
-Route::resource('about-section', AboutSectionController::class);
+    Route::resource('about-section', AboutSectionController::class);
 
-Route::resource('features', FeaturesController::class);
+    Route::resource('features', FeaturesController::class);
 
-Route::resource('sub-category', CourseSubCategoryController::class);
+    Route::resource('sub-category', CourseSubCategoryController::class);
 
-Route::resource('category', CourseCategoryController::class);
+    Route::resource('category', CourseCategoryController::class);
 
-Route::resource('course-level', CourseLevelController::class);
+    Route::resource('course-level', CourseLevelController::class);
 
-Route::resource('course-lang', CourseLanguageController::class);
+    Route::resource('course-lang', CourseLanguageController::class);
 
-Route::resource('hero-section', HeroController::class);
+    Route::resource('hero-section', HeroController::class);
 
-Route::resource('instructor-requests', InstructorRequestController::class);
+    Route::resource('instructor-requests', InstructorRequestController::class);
 
-Route::resource('profile', AdminProfileController::class);
+    Route::resource('profile', AdminProfileController::class);
 
-Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
-Route::post('logout', [AdminDashboardController::class, 'destroy'])
+    Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::post('logout', [AdminDashboardController::class, 'destroy'])
         ->name('logout');
 });
 
 
-Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'], function(){
+Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'], function () {
+
+    /**
+     * Course Routes
+     */
+    Route::post('course/store-basic-info', [CourseController::class, 'storeBasicInfo'])->name('course.storeBasicInfo');
+    Route::get('course/create', [CourseController::class, 'create'])->name('course.create');
+    Route::get('course', [CourseController::class, 'index'])->name('course.index');
+
+    /**
+     * Course Routes
+     */
+
     Route::resource('profile', InstructorProfileController::class);
-Route::post('logout', [InstructorDashboardController::class, 'destroy'])
+    Route::post('logout', [InstructorDashboardController::class, 'destroy'])
         ->name('logout');
     Route::get('dashboard', [InstructorDashboardController::class, 'dashboard'])->name('dashboard');
-
 });
 
 
-Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function(){
+Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
 
-Route::resource('profile', StudentProfileController::class);
-Route::post('logout', [StudentDashboardController::class, 'destroy'])
+    Route::resource('profile', StudentProfileController::class);
+    Route::post('logout', [StudentDashboardController::class, 'destroy'])
         ->name('logout');
-Route::get('dashboard', [StudentDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('dashboard', [StudentDashboardController::class, 'dashboard'])->name('dashboard');
 });
 
 
@@ -88,8 +100,4 @@ Route::get('dashboard', [StudentDashboardController::class, 'dashboard'])->name(
 
 
 
-require __DIR__.'/auth.php';
-
-
-
-
+require __DIR__ . '/auth.php';
