@@ -60,6 +60,15 @@ return [
                 'image/gif',
                 'application/pdf',
                 'text/plain',
+                // Add these video MIME types
+            'video/mp4',
+            'video/quicktime',
+            'video/x-msvideo',
+            'video/x-ms-wmv',
+            'video/x-flv',
+            'video/webm',
+            'video/3gpp',
+            'video/ogg',
             ],
         ],
         'image' => [
