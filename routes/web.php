@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorProfileController;
@@ -79,6 +80,10 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
     /**
      * Course Routes
      */
+
+    Route::post('course-content-chpter/store', [CourseContentController::class, 'storeChapter'])->name('course-content-chapter.store');
+    Route::get('course-content-chpter/create', [CourseContentController::class, 'createChapter'])->name('course-content-chapter.create');
+
     Route::post('course/update/', [CourseController::class, 'update'])->name('course.update');
     Route::get('course/edit/{course_id}/', [CourseController::class, 'edit'])->name('course.edit');
     Route::post('course/store-basic-info', [CourseController::class, 'storeBasicInfo'])->name('course.storeBasicInfo');

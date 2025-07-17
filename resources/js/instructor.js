@@ -144,3 +144,61 @@ $(document).on("submit", ".basic-info-update-form", function (e) {
         },
     });
 });
+
+
+
+$(document).on('click', '.course-tab', function(e){
+    e.preventDefault();
+    let step = $(this).data('step');
+    $('.course-form').find('input[name=next_step]').val(step);
+    $('.course-form').trigger('submit');
+})
+
+
+
+var loader = `
+<div class="modal-content text-center p-3" style="display:inline">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+`;
+
+
+
+$('.dynamic-modal-btn').on('click', function(e){
+    e.preventDefault();
+    $('.dynamic-modal').modal('show');
+
+    let course_id = $('.dynamic-modal-btn').data('id');
+
+    $.ajax({
+        url: config.routes.createChapter,
+        method: 'GET',
+        data: {
+            course_id: course_id
+        },
+        beforeSend: function(){
+            $('.dynamic-modal-content').html(loader);
+        },
+        success: function(data){
+             $('.dynamic-modal-content').html(data);
+        },
+          error: function (xhr) {
+            if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                $.each(errors, function (key, value) {
+                    $(`input[name="${key}"], textarea[name="${key}"]`).addClass(
+                        "is-invalid"
+                    );
+                    $(`input[name="${key}"], textarea[name="${key}"]`)
+                        .next(".text-danger")
+                        .remove();
+                    $(`input[name="${key}"], textarea[name="${key}"]`).after(
+                        `<span class="text-danger">${value[0]}</span>`
+                    );
+                });
+            }
+        },
+    })
+})

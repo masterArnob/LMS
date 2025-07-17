@@ -2,7 +2,7 @@
 @section('course_content_info')
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
       <div class="add_course_basic_info">
-          <form class="basic-info-update-form">
+          <form class="basic-info-update-form course-form">
             <input type="hidden" name="current_step" value="1">
             <input type="hidden" name="next_step" value="2">
             <input type="hidden" name="course_id" value="{{ $course->id }}">
