@@ -102,3 +102,45 @@ $(document).on('submit', '.more_info_form', function(e){
         },
     });
 });
+
+
+$(document).on("submit", ".basic-info-update-form", function (e) {
+    e.preventDefault();
+    let formData = new FormData(this);
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    $.ajax({
+        url: config.routes.courseUpdate,
+        method: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data.status == "success") {
+                notyf.success(data.message);
+                window.location.href = data.redirect_route;
+            }
+        },
+        error: function (xhr) {
+            if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                $.each(errors, function (key, value) {
+                    $(`input[name="${key}"], textarea[name="${key}"]`).addClass(
+                        "is-invalid"
+                    );
+                    $(`input[name="${key}"], textarea[name="${key}"]`)
+                        .next(".text-danger")
+                        .remove();
+                    $(`input[name="${key}"], textarea[name="${key}"]`).after(
+                        `<span class="text-danger">${value[0]}</span>`
+                    );
+                });
+            }
+        },
+    });
+});

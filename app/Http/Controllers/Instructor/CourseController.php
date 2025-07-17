@@ -10,11 +10,14 @@ use App\Models\CourseLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
+use File;
 class CourseController extends Controller
 {
     public function index(){
-        return view('instructor.course.index');
+        $courses = Course::where(['instructor_id' => Auth::user()->id])
+        ->orderBy('id', 'DESC')
+        ->get();
+        return view('instructor.course.index', compact('courses'));
     }
 
 
@@ -78,7 +81,9 @@ class CourseController extends Controller
     public function edit(Request $request){
        switch($request->step){
         case '1':
-            return 'this is case 1 edit page';
+           // return 'this is case 1 edit page';
+           $course = Course::findOrFail($request->course_id);
+            return view('instructor.course.edit', compact('course'));
             break;
         case '2':
            // return 'this iis more info';
@@ -104,7 +109,54 @@ class CourseController extends Controller
     public function update(Request $request){
         switch($request->current_step){
             case '1':
-                return 'this is case 1 for update';
+                //return 'this is case 1 for update';
+            $request->validate([
+            'title' => ['required', 'string'],
+            'price' => ['required', 'numeric'],
+            'description' => ['required', 'string'],
+            'seo_description' => ['nullable', 'string'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+            'discount' => ['nullable', 'numeric'],
+        ]);
+
+        $course = Course::findOrFail($request->course_id);
+
+               if ($request->has('thumbnail')) {
+                if(File::exists(public_path($request->thumbnail))){
+                    File::delete(public_path($request->thumbnail));
+                }
+                    $file = $request->thumbnail;
+                    $file_name = rand() . $file->getClientOriginalName();
+                    $file->move(public_path('/uploads/instructor_images/'), $file_name);
+                    $course->thumbnail = '/uploads/instructor_images/' . $file_name;
+                }
+
+                $source = null;
+                if($request->demo_video_storage === 'upload'){
+                    $source = $request->path;
+                }else{
+                    $source = $request->url;
+                }
+                //dd($source);
+
+    
+        $course->title = $request->title;
+        $course->slug = \Str::slug($request->title);
+        $course->seo_description = $request->seo_description;
+        $course->demo_video_storage = $request->demo_video_storage;
+        $course->demo_video_source = $source;
+        $course->description = $request->description;
+        $course->price = $request->price;
+        $course->discount = $request->discount;
+        $course->save();
+
+
+
+        return response([
+        'status' => 'success',
+        'message' => 'Course basic information saved successfully.', 
+        'redirect_route' => route('instructor.course.edit', ['course_id' => $course->id, 'step' => $request->next_step])
+    ]);
                 break;
             case '2':
                 //return 'this is case 2 for update';

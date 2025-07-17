@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-12 wow fadeInUp">
                         <div class="wsus__breadcrumb_text">
-                            <h1>Create Course</h1>
+                            <h1>Instructor Dashboard</h1>
                             <ul>
                                 <li><a href="#">Home</a></li>
                                 <li>Edit Profile</li>
