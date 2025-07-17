@@ -79,6 +79,8 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
     /**
      * Course Routes
      */
+    Route::post('course/update/', [CourseController::class, 'update'])->name('course.update');
+    Route::get('course/edit/{course_id}/', [CourseController::class, 'edit'])->name('course.edit');
     Route::post('course/store-basic-info', [CourseController::class, 'storeBasicInfo'])->name('course.storeBasicInfo');
     Route::get('course/create', [CourseController::class, 'create'])->name('course.create');
     Route::get('course', [CourseController::class, 'index'])->name('course.index');

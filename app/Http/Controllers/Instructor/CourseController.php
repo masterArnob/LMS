@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Instructor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\CourseCategory;
+use App\Models\CourseLanguage;
+use App\Models\CourseLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CourseController extends Controller
 {
@@ -15,12 +19,12 @@ class CourseController extends Controller
 
 
     public function create(){
-        return view('instructor.course.create');
+        return view('instructor.course.basic');
     }
 
 
     public function storeBasicInfo(Request $request){
-       // dd($request->all());
+       //dd($request->all());
         $request->validate([
             'title' => ['required', 'string'],
             'price' => ['required', 'numeric'],
@@ -58,6 +62,89 @@ class CourseController extends Controller
         $course->discount = $request->discount;
         $course->is_approved = 'pending';
         $course->save();
-        return response(['status' => 'success', 'message' => 'Course basic information saved successfully.']);
+
+
+        Session::put('course_id', $course->id);
+
+        return response([
+        'status' => 'success',
+        'message' => 'Course basic information saved successfully.', 
+        'redirect_route' => route('instructor.course.edit', ['course_id' => $course->id, 'step' => $request->next_step])
+    ]);
+    }
+
+
+
+    public function edit(Request $request){
+       switch($request->step){
+        case '1':
+            return 'this is case 1 edit page';
+            break;
+        case '2':
+           // return 'this iis more info';
+           $cats = CourseCategory::where('status', 'active')->orderBy('name', 'ASC')->get();
+           $langs = CourseLanguage::where('status', 'active')->orderby('name', 'ASC')->get();
+           $levels = CourseLevel::where('status', 'active')->orderBy('id', 'ASC')->get();
+           return view('instructor.course.more-info', compact('cats', 'langs', 'levels'));
+            break;
+        case '3':
+            return 'this is case 3 edit page';
+            break;
+        case '4':
+            return 'this is case 4 edit page';
+            break;
+        default:
+            return 'this is default case edit page';
+            break;
+       }
+    }
+
+
+
+    public function update(Request $request){
+        switch($request->current_step){
+            case '1':
+                return 'this is case 1 for update';
+                break;
+            case '2':
+                //return 'this is case 2 for update';
+               // dd($request->all());
+                $request->validate([
+                    'capacity' => ['required', 'numeric'],
+                    'duration' => ['required', 'numeric'],
+                    'category_id' => ['required'],
+                    'language_id' => ['required', 'exists:course_languages,id'],
+                    'level_id' => ['required', 'exists:course_levels,id'],
+                    'qna' => ['nullable', 'boolean'],
+                    'certificate' => ['nullable', 'boolean'],
+                ]);
+                $course_id = Session::get('course_id');
+                $course = Course::findOrFail($course_id);
+                $course->capacity = $request->capacity;
+                $course->duration = $request->duration;
+                $course->category_id = $request->category_id;
+                $course->course_language_id = $request->language_id;
+                $course->course_level_id = $request->level_id;
+                $course->qna = $request->qna ? 1 : 0;
+                $course->certificate = $request->certificate ? 1 : 0;
+                $course->save();
+                notyf()->success('Course more information saved successfully.');
+                return response([
+                    'status' => 'success',
+                    'message' => 'Course more information saved successfully.',
+                    'redirect_route' => route('instructor.course.edit', ['course_id' => $course->id, 'step' => $request->next_step])
+                ]);
+                break;
+            case '3':
+                return 'this is case 3 for update';
+                break;
+            case '4':
+                return 'this is case 4 for upadte';
+                break;
+            default:
+                return 'this is default case for update';
+                break;
+        }
+      
     }
 }

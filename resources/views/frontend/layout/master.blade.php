@@ -168,6 +168,7 @@
             var config = {
             routes: {
                 storeBasicInfo: "{{ route('instructor.course.storeBasicInfo') }}",
+                courseUpdate: "{{ route('instructor.course.update') }}",
             },
            // icon: {
             //    currency_icon: "{{ $settings->currency_icon ?? '$' }}",

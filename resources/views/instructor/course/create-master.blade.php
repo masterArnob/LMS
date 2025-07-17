@@ -46,26 +46,24 @@
                         <div class="dashboard_add_courses">
                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                        data-bs-target="#pills-home" type="button" role="tab"
-                                        aria-controls="pills-home" aria-selected="true">Basic Infos</button>
+                                    <a href="" class="nav-link course-tab {{ request('step') == 1 ? 'active' : '' }}">Basic Infos</a>
                                 </li>
 
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                        data-bs-target="#pills-profile" type="button" role="tab"
-                                        aria-controls="pills-profile" aria-selected="false">More Infos</button>
+                                  <li class="nav-item" role="presentation">
+                                    <a href="" class="nav-link course-tab {{ request('step') == 2 ? 'active' : '' }}">More Infos</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                        data-bs-target="#pills-contact" type="button" role="tab"
-                                        aria-controls="pills-contact" aria-selected="false">Course Contents</button>
+
+
+                                  <li class="nav-item" role="presentation">
+                                    <a href="" class="nav-link course-tab {{ request('step') == 3 ? 'active' : '' }}">Course Contents</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-contact-tab2" data-bs-toggle="pill"
-                                        data-bs-target="#pills-contact2" type="button" role="tab"
-                                        aria-controls="pills-contact2" aria-selected="false">Finish</button>
+
+
+                                  <li class="nav-item" role="presentation">
+                                    <a href="" class="nav-link course-tab {{ request('step') == 4 ? 'active' : '' }}">Finish</a>
                                 </li>
+
+                          
                             </ul>
 
 
@@ -73,7 +71,13 @@
 
 
                             <div class="tab-content" id="pills-tabContent">
-                                @include('instructor.course.parts.basic-info-section')
+                              
+                              
+                                @yield('course_content_info')
+                        
+                            {{-- 
+                            
+                                  @include('instructor.course.parts.basic-info-section')
 
 
                                 @include('instructor.course.parts.more-info-section')
@@ -84,6 +88,8 @@
 
 
                                 @include('instructor.course.parts.finish-section')
+                            --}}
+                    
 
 
 
