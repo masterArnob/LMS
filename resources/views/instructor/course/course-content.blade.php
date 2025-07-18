@@ -26,7 +26,7 @@
                                 <i class="far fa-plus"></i>
                             </div>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Add Lesson</a>
+                                <li><a data-course-id="{{ $course->id }}" data-chapter-id="{{ $chapter->id }}" class="add-lesson-btn dropdown-item" href="javascript:;">Add Lesson</a>
                                 </li>
                                 <li><a class="dropdown-item" href="#">Add Document</a>
                                 </li>
@@ -40,48 +40,27 @@
                 <div id="collapse-{{ $chapter->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul class="item_list">
-                            <li>
-                                <span>Aut autem dolorem debitis mollitia.</span>
+                   
+                       
+                            @forelse ($chapter->lessons as $lesson)
+                                   <li>
+                                <span>{{ $lesson->title }}</span>
                                 <div class="add_course_content_action_btn">
                                     <a class="edit" href="#"><i class="far fa-edit"></i></a>
                                     <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
                                     <a class="arrow" href="#"><i class="fas fa-arrows-alt"></i></a>
                                 </div>
                             </li>
-                            <li>
-                                <span>Aut autem dolorem debitis mollitia.</span>
-                                <div class="add_course_content_action_btn">
-                                    <a class="edit" href="#"><i class="far fa-edit"></i></a>
-                                    <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
-                                    <a class="arrow" href="#"><i class="fas fa-arrows-alt"></i></a>
-                                </div>
-                            </li>
-                            <li>
-                                <span>Aut autem dolorem debitis mollitia.</span>
-                                <div class="add_course_content_action_btn">
-                                    <a class="edit" href="#"><i class="far fa-edit"></i></a>
-                                    <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
-                                    <a class="arrow" href="#"><i class="fas fa-arrows-alt"></i></a>
-                                </div>
-                            </li>
-                            <li>
-                                <span>Aut autem dolorem debitis mollitia.</span>
-                                <div class="add_course_content_action_btn">
-                                    <a class="edit" href="#"><i class="far fa-edit"></i></a>
-                                    <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
-                                    <a class="arrow" href="#"><i class="fas fa-arrows-alt"></i></a>
-                                </div>
-                            </li>
-                            <li>
-                                <span>Aut autem dolorem debitis mollitia.</span>
-                                <div class="add_course_content_action_btn">
-                                    <a class="edit" href="#"><i class="far fa-edit"></i></a>
-                                    <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
-                                    <a class="arrow" href="#"><i class="fas fa-arrows-alt"></i></a>
-                                </div>
-                            </li>
+                            @empty
+                                No Data Available
+                            @endforelse
+                    
+                         
+                          
                         </ul>
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                    
+                        {{-- 
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -116,6 +95,7 @@
                                 </div>
                             </div>
                         </div>
+                        --}}
                     </div>
                 </div>
             </div>

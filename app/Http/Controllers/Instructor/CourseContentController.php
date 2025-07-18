@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Instructor;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseChapter;
+use App\Models\CourseChapterLesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,53 @@ class CourseContentController extends Controller
         $chapter->course_id = $request->course_id;
         $chapter->order = CourseChapter::where('course_id', $request->course_id)->count() + 1;
         $chapter->save();
+        return redirect()->back();
+    }
+
+
+    public function createLesson(Request $request){
+           $course_id = $request->course_id;
+           $chapter_id = $request->chapter_id;
+           return view('instructor.course.partials.course-content-add-lesson', compact('course_id', 'chapter_id'))->render();
+    }
+
+
+    public function storeLesson(Request $request){
+        //dd($request->all());
+        $request->validate([
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'file_type' => ['required'],
+            'downloadable' => ['required'],
+            'is_preview' => ['required']
+        ]);
+
+           $source = null;
+        if ($request->demo_video_storage === 'upload') {
+            $source = $request->path;
+        } else {
+            $source = $request->url;
+        }
+
+        $lesson = new CourseChapterLesson();
+        $lesson->title = $request->title;
+        $lesson->file_path = $source;
+        $lesson->slug = \Str::slug($request->title);
+        $lesson->description = $request->description;
+        $lesson->instructor_id = Auth::user()->id;
+        $lesson->course_id = $request->course_id;
+        $lesson->chapter_id = $request->chapter_id;
+        $lesson->volume = $request->volume;
+        $lesson->duration = $request->duration;
+        $lesson->file_type = $request->file_type;
+        $lesson->downloadable = $request->downloadable;
+        $lesson->is_preview = $request->is_preview;
+        $lesson->order = CourseChapterLesson::where('chapter_id', $request->chapter_id)->count() + 1;
+        $lesson->storage = $request->demo_video_storage;
+        $lesson->status = 'active';
+        $lesson->lesson_type = 'lesson'; 
+        $lesson->approve_status = 'pending';
+        $lesson->save();
         return redirect()->back();
     }
 }

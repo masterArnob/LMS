@@ -80,7 +80,7 @@
 
 <!-- Dynamic Modal -->
 <div class="modal fade dynamic-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered dynamic-modal-content">
+  <div class="modal-dialog modal-lg modal-dialog-centered dynamic-modal-content">
 
   </div>
 </div>
@@ -180,6 +180,7 @@
                 storeBasicInfo: "{{ route('instructor.course.storeBasicInfo') }}",
                 courseUpdate: "{{ route('instructor.course.update') }}",
                 createChapter: "{{ route('instructor.course-content-chapter.create') }}",
+                createLesson: "{{ route('instructor.course-content-chapter-lesson.create') }}",
             },
            // icon: {
             //    currency_icon: "{{ $settings->currency_icon ?? '$' }}",

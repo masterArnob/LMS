@@ -105,7 +105,9 @@ class CourseController extends Controller
                 //return 'this is case 3 edit page';
                // dd($request->course_id);
                 $course = Course::findOrFail($request->course_id);
-                $chapters = CourseChapter::where(['course_id' => $course->id, 'instructor_id' => Auth::user()->id])->get();
+                $chapters = CourseChapter::with(['lessons'])
+                ->where(['course_id' => $course->id, 'instructor_id' => Auth::user()->id])
+                ->get();
                 return view('instructor.course.course-content', compact('course', 'chapters'));
                 break;
             case '4':
