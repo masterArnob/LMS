@@ -34,7 +34,7 @@
                             </ul>
                         </div>
                         <a class="edit edit-chapter-btn" data-course-id="{{ $course->id }}" data-chapter-id="{{ $chapter->id }}" href="javascript:;"><i class="far fa-edit"></i></a>
-                        <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
+                        <a class="del delte-chapter-item" data-course-id="{{ $course->id }}" data-chapter-id="{{ $chapter->id }}" href="javascript:;"><i class="fas fa-trash-alt"></i></a>
                     </div>
                 </h2>
                 <div id="collapse-{{ $chapter->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">

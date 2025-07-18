@@ -153,4 +153,17 @@ class CourseContentController extends Controller
         notyf()->success('Chapter updated successfully.');
         return redirect()->back();
     }
+
+
+
+    public function deleteChapter(Request $request){
+        $chapter = CourseChapter::where(['id' => $request->chapter_id, 'instructor_id' => Auth::user()->id])->first();
+        $lessons = $chapter->lessons;
+        foreach ($lessons as $lesson) {
+            $lesson->delete();
+        }
+        $chapter->delete();
+        notyf()->success('Chapter deleted successfully.');
+        return response(['status' => 'success', 'message' => 'Chapter deleted successfully.']);
+    }
 }

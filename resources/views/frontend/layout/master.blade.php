@@ -182,6 +182,7 @@
                 courseUpdate: "{{ route('instructor.course.update') }}",
                 createChapter: "{{ route('instructor.course-content-chapter.create') }}",
                 editChapter: "{{ route('instructor.course-content-chapter.edit') }}",
+                deleteChapter: "{{ route('instructor.course-content-chapter.delete') }}",
                 createLesson: "{{ route('instructor.course-content-chapter-lesson.create') }}",
                 editLesson: "{{ route('instructor.course-content-chapter-lesson.edit') }}",
                 deleteLesson: "{{ route('instructor.course-content-chapter-lesson.delete') }}",
