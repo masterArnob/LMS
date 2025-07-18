@@ -81,6 +81,8 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
      * Course Routes
      */
 
+    Route::post('course/delete', [CourseController::class, 'delete'])->name('course.delete');
+
     Route::post('course-content-chpter-lesson/delete', [CourseContentController::class, 'deleteLesson'])->name('course-content-chapter-lesson.delete');
     Route::post('course-content-chpter-lesson/update', [CourseContentController::class, 'updateLesson'])->name('course-content-chapter-lesson.update');
     Route::get('course-content-chpter-lesson/edit', [CourseContentController::class, 'editLesson'])->name('course-content-chapter-lesson.edit');

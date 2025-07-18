@@ -1,9 +1,9 @@
-    <section class="wsus__offer" style="background: url(images/offer_bg.jpg);">
+    <section class="wsus__offer" style="background: url({{ asset('frontend/images/offer_bg.jpg') }});">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-xl-4 col-md-6 wow fadeInLeft">
                     <div class="wsus__offer_img">
-                        <img src="images/offer_img_1.png" alt="Offer" class="img-fluid w-100">
+                        <img src="{{ asset('frontend/images/offer_img_1.png') }}" alt="Offer" class="img-fluid w-100">
                     </div>
                 </div>
                 <div class="col-xl-6 col-md-6 wow fadeInRight">

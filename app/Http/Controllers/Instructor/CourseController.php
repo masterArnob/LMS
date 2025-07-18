@@ -111,7 +111,9 @@ class CourseController extends Controller
                 return view('instructor.course.course-content', compact('course', 'chapters'));
                 break;
             case '4':
-                return 'this is case 4 edit page';
+                //return 'this is case 4 edit page';
+                $course = Course::findOrFail($request->course_id);
+                return view('instructor.course.finish', compact('course'));
                 break;
             default:
                 return 'this is default case edit page';
@@ -204,14 +206,47 @@ class CourseController extends Controller
                 ]);
                 break;
             case '3':
-                return 'this is case 3 for update';
+                
+                 return response([
+                    'status' => 'success',
+                    'message' => 'Updated successfully.',
+                    'redirect_route' => route('instructor.course.edit', ['course_id' => $request->course_id, 'step' => $request->next_step])
+                ]);
                 break;
             case '4':
-                return 'this is case 4 for upadte';
+                //return 'this is case 4 for upadte';
+                $request->validate([
+                    'status' => ['required']
+                ]);
+                $course = Course::findOrFail($request->course_id);
+                $course->message_for_reviewer = $request->message_for_reviewer;
+                $course->status = $request->status;
+                $course->save();
+                return response([
+                    'status' => 'success',
+                    'message' => 'Course status updated successfully.',
+                    'redirect_route' => route('instructor.course.index')
+                ]);
                 break;
             default:
                 return 'this is default case for update';
                 break;
         }
+    }
+
+
+    public function delete(Request $request){
+        $course = Course::where(['id' => $request->course_id, 'instructor_id' => Auth::user()->id])->first();
+        $chapters = CourseChapter::where('course_id', $course->id)->get();
+        foreach ($chapters as $chapter) {
+            $lessons = $chapter->lessons;
+            foreach ($lessons as $lesson) {
+                $lesson->delete();
+            }
+            $chapter->delete();
+        }
+        $course->delete();
+        notyf()->success('Course deleted successfully.');
+        return response(['status' => 'success', 'message' => 'Course deleted successfully.']);
     }
 }

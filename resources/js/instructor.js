@@ -82,7 +82,7 @@ $(document).on("submit", ".more_info_form", function (e) {
         processData: false,
         success: function (data) {
             if (data.status == "success") {
-                console.log(data.message);
+                notyf.success(data.message);
                 window.location.href = data.redirect_route;
             }
         },
@@ -413,6 +413,73 @@ $(function () {
                     data: {
                         course_id: course_id,
                         chapter_id: chapter_id,
+                    },
+                    success: function (data) {
+                        if(data.status == "success") {
+                            notyf.success(data.message);
+                             Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                            window.location.reload();
+                        }
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            $.each(errors, function (key, value) {
+                                $(
+                                    `input[name="${key}"], textarea[name="${key}"]`
+                                ).addClass("is-invalid");
+                                $(
+                                    `input[name="${key}"], textarea[name="${key}"]`
+                                )
+                                    .next(".text-danger")
+                                    .remove();
+                                $(
+                                    `input[name="${key}"], textarea[name="${key}"]`
+                                ).after(
+                                    `<span class="text-danger">${value[0]}</span>`
+                                );
+                            });
+                        }
+                    },
+                });
+               
+            }
+        });
+    });
+});
+
+
+
+
+$(function () {
+    $(document).on("click", ".delete-course", function (e) {
+        e.preventDefault();
+      
+        let course_id = $(this).data("course-id");
+       // alert(course_id);
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Delete This Data?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: config.routes.deleteCourse,
+                    method: "POST",
+                    data: {
+                        course_id: course_id,
                     },
                     success: function (data) {
                         if(data.status == "success") {
