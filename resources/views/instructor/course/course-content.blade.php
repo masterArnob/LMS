@@ -33,7 +33,7 @@
                                 <li><a class="dropdown-item" href="#">Add Quiz</a></li>
                             </ul>
                         </div>
-                        <a class="edit" href="#"><i class="far fa-edit"></i></a>
+                        <a class="edit edit-chapter-btn" data-course-id="{{ $course->id }}" data-chapter-id="{{ $chapter->id }}" href="javascript:;"><i class="far fa-edit"></i></a>
                         <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
                     </div>
                 </h2>

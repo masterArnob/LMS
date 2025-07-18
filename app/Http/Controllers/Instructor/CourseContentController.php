@@ -28,6 +28,7 @@ class CourseContentController extends Controller
         $chapter->course_id = $request->course_id;
         $chapter->order = CourseChapter::where('course_id', $request->course_id)->count() + 1;
         $chapter->save();
+        notyf()->success('Chapter created successfully.');
         return redirect()->back();
     }
 
@@ -129,5 +130,27 @@ class CourseContentController extends Controller
        $lesson = CourseChapterLesson::where(['id' => $request->lesson_id, 'instructor_id' => Auth::user()->id])->first();
        $lesson->delete();
        return response(['status' => 'success', 'message' => 'Lesson deleted successfully.']);
+    }
+
+
+    public function editChapter(Request $request){
+           $editMode = true;
+           $course = Course::findOrFail($request->course_id);
+           $chapter = CourseChapter::where(['id' => $request->chapter_id, 'instructor_id' => Auth::user()->id])->first();
+           return view('instructor.course.partials.course-content-add-chapter', compact('course', 'chapter', 'editMode'))->render();
+    }
+
+
+    public function updateChapter(Request $request){
+        //dd($request->all());
+        $request->validate([
+            'title' => ['required', 'string'],
+        ]);
+
+        $chapter = CourseChapter::where(['id' => $request->chapter_id, 'instructor_id' => Auth::user()->id])->first();
+        $chapter->title = $request->title;
+        $chapter->save();
+        notyf()->success('Chapter updated successfully.');
+        return redirect()->back();
     }
 }

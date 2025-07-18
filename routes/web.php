@@ -88,6 +88,8 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
     Route::get('course-content-chpter-lesson/create', [CourseContentController::class, 'createLesson'])->name('course-content-chapter-lesson.create');
 
 
+        Route::post('course-content-chpter/update', [CourseContentController::class, 'updateChapter'])->name('course-content-chapter.update');
+     Route::get('course-content-chpter/edit', [CourseContentController::class, 'editChapter'])->name('course-content-chapter.edit');
     Route::post('course-content-chpter/store', [CourseContentController::class, 'storeChapter'])->name('course-content-chapter.store');
     Route::get('course-content-chpter/create', [CourseContentController::class, 'createChapter'])->name('course-content-chapter.create');
 
