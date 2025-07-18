@@ -245,6 +245,52 @@ $('.add-lesson-btn').on('click', function(e){
             }
         },
     })
+})
+
+
+
+
+
+
+$('.edit-lesson-btn').on('click', function(e){
+    e.preventDefault();
+    $('.dynamic-modal').modal('show');
+
+    let course_id = $(this).data('course-id');
+    let chapter_id = $(this).data('chapter-id');
+    let lesson_id = $(this).data('lesson-id');
+
+        $.ajax({
+        url: config.routes.editLesson,
+        method: 'GET',
+        data: {
+            course_id: course_id, 
+            chapter_id: chapter_id,
+            lesson_id: lesson_id
+        },
+        beforeSend: function(){
+            $('.dynamic-modal-content').html(loader);
+        },
+        success: function(data){
+             $('.dynamic-modal-content').html(data);
+        },
+          error: function (xhr) {
+            if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                $.each(errors, function (key, value) {
+                    $(`input[name="${key}"], textarea[name="${key}"]`).addClass(
+                        "is-invalid"
+                    );
+                    $(`input[name="${key}"], textarea[name="${key}"]`)
+                        .next(".text-danger")
+                        .remove();
+                    $(`input[name="${key}"], textarea[name="${key}"]`).after(
+                        `<span class="text-danger">${value[0]}</span>`
+                    );
+                });
+            }
+        },
+    })
 
 
 })

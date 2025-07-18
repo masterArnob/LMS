@@ -77,4 +77,49 @@ class CourseContentController extends Controller
         $lesson->save();
         return redirect()->back();
     }
+
+
+
+    public function editLesson(Request $request){
+        $editMode = true;
+        $course_id = $request->course_id;
+        $chapter_id = $request->chapter_id;
+        $lesson_id = $request->lesson_id;
+        $lesson = CourseChapterLesson::where(['id' => $lesson_id, 'instructor_id' => Auth::user()->id])->first();
+        return view('instructor.course.partials.course-content-add-lesson', compact('course_id', 'chapter_id', 'lesson', 'editMode'))->render();
+    }
+
+
+    public function updateLesson(Request $request){
+        //dd($request->all());
+           $request->validate([
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'file_type' => ['required'],
+            'downloadable' => ['required'],
+            'is_preview' => ['required']
+        ]);
+
+           $source = null;
+        if ($request->demo_video_storage === 'upload') {
+            $source = $request->path;
+        } else {
+            $source = $request->url;
+        }
+
+        $lesson = CourseChapterLesson::findOrFail($request->lesson_id);
+        $lesson->title = $request->title;
+        $lesson->file_path = $source;
+        $lesson->slug = \Str::slug($request->title);
+        $lesson->description = $request->description;
+        $lesson->volume = $request->volume;
+        $lesson->duration = $request->duration;
+        $lesson->file_type = $request->file_type;
+        $lesson->downloadable = $request->downloadable;
+        $lesson->is_preview = $request->is_preview;
+        $lesson->storage = $request->demo_video_storage;
+        $lesson->save();
+        notyf()->success('Lesson updated successfully.');
+        return redirect()->back();
+    }
 }

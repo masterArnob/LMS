@@ -181,6 +181,8 @@
                 courseUpdate: "{{ route('instructor.course.update') }}",
                 createChapter: "{{ route('instructor.course-content-chapter.create') }}",
                 createLesson: "{{ route('instructor.course-content-chapter-lesson.create') }}",
+                editLesson: "{{ route('instructor.course-content-chapter-lesson.edit') }}",
+                
             },
            // icon: {
             //    currency_icon: "{{ $settings->currency_icon ?? '$' }}",
