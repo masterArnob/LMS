@@ -64,45 +64,42 @@ $(document).ready(function () {
     });
 });
 
-
-
-$(document).on('submit', '.more_info_form', function(e){
+$(document).on("submit", ".more_info_form", function (e) {
     e.preventDefault();
     let formData = new FormData(this);
 
-        $.ajaxSetup({
+    $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
 
-
     $.ajax({
         url: config.routes.courseUpdate,
-        method: 'POST',
+        method: "POST",
         data: formData,
         contentType: false,
         processData: false,
-        success: function(data){
-                if(data.status == 'success'){
-                    console.log(data.message);
-                    window.location.href = data.redirect_route;
-                }
-                
+        success: function (data) {
+            if (data.status == "success") {
+                console.log(data.message);
+                window.location.href = data.redirect_route;
+            }
         },
-        error: function(xhr){
-            if(xhr.status === 422){
+        error: function (xhr) {
+            if (xhr.status === 422) {
                 let errors = xhr.responseJSON.errors;
-                $.each(errors, function(key, value){
-                    $(`input[name="${key}"]`).addClass('is-invalid');
-                    $(`input[name="${key}"]`).next('.text-danger').remove();
-                    $(`input[name="${key}"]`).after(`<span class="text-danger">${value[0]}</span>`);
+                $.each(errors, function (key, value) {
+                    $(`input[name="${key}"]`).addClass("is-invalid");
+                    $(`input[name="${key}"]`).next(".text-danger").remove();
+                    $(`input[name="${key}"]`).after(
+                        `<span class="text-danger">${value[0]}</span>`
+                    );
                 });
             }
         },
     });
 });
-
 
 $(document).on("submit", ".basic-info-update-form", function (e) {
     e.preventDefault();
@@ -145,16 +142,12 @@ $(document).on("submit", ".basic-info-update-form", function (e) {
     });
 });
 
-
-
-$(document).on('click', '.course-tab', function(e){
+$(document).on("click", ".course-tab", function (e) {
     e.preventDefault();
-    let step = $(this).data('step');
-    $('.course-form').find('input[name=next_step]').val(step);
-    $('.course-form').trigger('submit');
-})
-
-
+    let step = $(this).data("step");
+    $(".course-form").find("input[name=next_step]").val(step);
+    $(".course-form").trigger("submit");
+});
 
 var loader = `
 <div class="modal-content text-center p-3" style="display:inline">
@@ -164,27 +157,25 @@ var loader = `
 </div>
 `;
 
-
-
-$('.dynamic-modal-btn').on('click', function(e){
+$(".dynamic-modal-btn").on("click", function (e) {
     e.preventDefault();
-    $('.dynamic-modal').modal('show');
+    $(".dynamic-modal").modal("show");
 
-    let course_id = $('.dynamic-modal-btn').data('id');
+    let course_id = $(".dynamic-modal-btn").data("id");
 
     $.ajax({
         url: config.routes.createChapter,
-        method: 'GET',
+        method: "GET",
         data: {
-            course_id: course_id
+            course_id: course_id,
         },
-        beforeSend: function(){
-            $('.dynamic-modal-content').html(loader);
+        beforeSend: function () {
+            $(".dynamic-modal-content").html(loader);
         },
-        success: function(data){
-             $('.dynamic-modal-content').html(data);
+        success: function (data) {
+            $(".dynamic-modal-content").html(data);
         },
-          error: function (xhr) {
+        error: function (xhr) {
             if (xhr.status === 422) {
                 let errors = xhr.responseJSON.errors;
                 $.each(errors, function (key, value) {
@@ -200,35 +191,30 @@ $('.dynamic-modal-btn').on('click', function(e){
                 });
             }
         },
-    })
-})
+    });
+});
 
-
-
-
-
-
-$('.add-lesson-btn').on('click', function(e){
+$(".add-lesson-btn").on("click", function (e) {
     e.preventDefault();
-    $('.dynamic-modal').modal('show');
+    $(".dynamic-modal").modal("show");
 
-    let course_id = $(this).data('course-id');
-    let chapter_id = $(this).data('chapter-id');
+    let course_id = $(this).data("course-id");
+    let chapter_id = $(this).data("chapter-id");
 
-        $.ajax({
+    $.ajax({
         url: config.routes.createLesson,
-        method: 'GET',
+        method: "GET",
         data: {
-            course_id: course_id, 
+            course_id: course_id,
             chapter_id: chapter_id,
         },
-        beforeSend: function(){
-            $('.dynamic-modal-content').html(loader);
+        beforeSend: function () {
+            $(".dynamic-modal-content").html(loader);
         },
-        success: function(data){
-             $('.dynamic-modal-content').html(data);
+        success: function (data) {
+            $(".dynamic-modal-content").html(data);
         },
-          error: function (xhr) {
+        error: function (xhr) {
             if (xhr.status === 422) {
                 let errors = xhr.responseJSON.errors;
                 $.each(errors, function (key, value) {
@@ -244,37 +230,32 @@ $('.add-lesson-btn').on('click', function(e){
                 });
             }
         },
-    })
-})
+    });
+});
 
-
-
-
-
-
-$('.edit-lesson-btn').on('click', function(e){
+$(".edit-lesson-btn").on("click", function (e) {
     e.preventDefault();
-    $('.dynamic-modal').modal('show');
+    $(".dynamic-modal").modal("show");
 
-    let course_id = $(this).data('course-id');
-    let chapter_id = $(this).data('chapter-id');
-    let lesson_id = $(this).data('lesson-id');
+    let course_id = $(this).data("course-id");
+    let chapter_id = $(this).data("chapter-id");
+    let lesson_id = $(this).data("lesson-id");
 
-        $.ajax({
+    $.ajax({
         url: config.routes.editLesson,
-        method: 'GET',
+        method: "GET",
         data: {
-            course_id: course_id, 
+            course_id: course_id,
             chapter_id: chapter_id,
-            lesson_id: lesson_id
+            lesson_id: lesson_id,
         },
-        beforeSend: function(){
-            $('.dynamic-modal-content').html(loader);
+        beforeSend: function () {
+            $(".dynamic-modal-content").html(loader);
         },
-        success: function(data){
-             $('.dynamic-modal-content').html(data);
+        success: function (data) {
+            $(".dynamic-modal-content").html(data);
         },
-          error: function (xhr) {
+        error: function (xhr) {
             if (xhr.status === 422) {
                 let errors = xhr.responseJSON.errors;
                 $.each(errors, function (key, value) {
@@ -290,7 +271,71 @@ $('.edit-lesson-btn').on('click', function(e){
                 });
             }
         },
-    })
+    });
+});
 
+$(function () {
+    $(document).on("click", ".delete-item", function (e) {
+        e.preventDefault();
+        let course_id = $(this).data("course-id");
+        let chapter_id = $(this).data("chapter-id");
+        let lesson_id = $(this).data("lesson-id");
 
-})
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        var link = $(this).attr("href");
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Delete This Data?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: config.routes.deleteLesson,
+                    method: "POST",
+                    data: {
+                        course_id: course_id,
+                        chapter_id: chapter_id,
+                        lesson_id: lesson_id,
+                    },
+                    success: function (data) {
+                        if(data.status == "success") {
+                            notyf.success(data.message);
+                             Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                            window.location.reload();
+                        }
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            $.each(errors, function (key, value) {
+                                $(
+                                    `input[name="${key}"], textarea[name="${key}"]`
+                                ).addClass("is-invalid");
+                                $(
+                                    `input[name="${key}"], textarea[name="${key}"]`
+                                )
+                                    .next(".text-danger")
+                                    .remove();
+                                $(
+                                    `input[name="${key}"], textarea[name="${key}"]`
+                                ).after(
+                                    `<span class="text-danger">${value[0]}</span>`
+                                );
+                            });
+                        }
+                    },
+                });
+               
+            }
+        });
+    });
+});

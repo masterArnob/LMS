@@ -122,4 +122,12 @@ class CourseContentController extends Controller
         notyf()->success('Lesson updated successfully.');
         return redirect()->back();
     }
+
+
+    public function deleteLesson(Request $request){
+       // dd($request->all());
+       $lesson = CourseChapterLesson::where(['id' => $request->lesson_id, 'instructor_id' => Auth::user()->id])->first();
+       $lesson->delete();
+       return response(['status' => 'success', 'message' => 'Lesson deleted successfully.']);
+    }
 }

@@ -156,6 +156,7 @@
      <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 
 
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
      
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
@@ -182,7 +183,7 @@
                 createChapter: "{{ route('instructor.course-content-chapter.create') }}",
                 createLesson: "{{ route('instructor.course-content-chapter-lesson.create') }}",
                 editLesson: "{{ route('instructor.course-content-chapter-lesson.edit') }}",
-                
+                deleteLesson: "{{ route('instructor.course-content-chapter-lesson.delete') }}",
             },
            // icon: {
             //    currency_icon: "{{ $settings->currency_icon ?? '$' }}",

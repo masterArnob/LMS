@@ -47,7 +47,7 @@
                                 <span>{{ $lesson->title }}</span>
                                 <div class="add_course_content_action_btn">
                                     <a class="edit edit-lesson-btn" data-lesson-id="{{ $lesson->id }}" data-course-id="{{ $course->id }}" data-chapter-id="{{ $chapter->id }}" href="javascript:;"><i class="far fa-edit"></i></a>
-                                    <a class="del" href="#"><i class="fas fa-trash-alt"></i></a>
+                                    <a class="del delete-item"  data-lesson-id="{{ $lesson->id }}" data-course-id="{{ $course->id }}" data-chapter-id="{{ $chapter->id }}" href="javascript:;"><i class="fas fa-trash-alt"></i></a>
                                     <a class="arrow" href="#"><i class="fas fa-arrows-alt"></i></a>
                                 </div>
                             </li>
