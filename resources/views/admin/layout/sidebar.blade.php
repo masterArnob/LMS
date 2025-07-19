@@ -255,6 +255,12 @@
                       </a>
 
 
+                         <a class="dropdown-item" href="{{ route('admin.news-letter.index') }}">
+                        News Letter Section
+                      </a>
+
+                      
+
                 
                   </div>
                 </div>

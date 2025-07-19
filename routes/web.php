@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CourseSubCategoryController;
 use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
+use App\Http\Controllers\Admin\NewsLetterController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
@@ -27,6 +28,12 @@ Route::get('/', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
+
+
+
+
+
 
 
 Route::get('/dashboard', function () {
@@ -41,6 +48,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+
+    Route::resource('news-letter', NewsLetterController::class);
 
     Route::resource('about-section', AboutSectionController::class);
 

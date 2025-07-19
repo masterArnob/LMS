@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/admin.js',
                 'resources/js/instructor.js',
                 'resources/js/student.js',
+                'resources/js/frontend.js',
             ],
             refresh: true,
         }),

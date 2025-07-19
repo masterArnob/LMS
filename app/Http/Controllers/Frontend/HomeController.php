@@ -7,6 +7,7 @@ use App\Models\AboutSection;
 use App\Models\CourseCategory;
 use App\Models\Features;
 use App\Models\HeroSection;
+use App\Models\NewsLetter;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,5 +26,18 @@ class HomeController extends Controller
             'categories',
             'aboutSection'
         ));
+    }
+
+
+
+
+
+
+    public function subscribe(Request $request){
+       // dd($request->all());
+       $subs = new NewsLetter();
+       $subs->email = $request->email;
+       $subs->save();
+       return response(['status' => 'success', 'message' => 'You have successfully subscribed to our newsletter!']);
     }
 }

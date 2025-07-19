@@ -17,7 +17,7 @@
                         <div class="play_btn_area">
                             <a class="play_btn venobox vbox-item" data-autoplay="true" data-vbtype="video"
                                 href="{{ @$hero->video_button_url }}">
-                                <img src="images/play_icon.png" alt="Play" class="img-fluid">
+                                <img src="{{ asset('uploads/default-files/play_icon.png') }}" alt="Play" class="img-fluid">
                             </a>
                             <h4>{{ @$hero->video_button_text }}</h4>
                         </div>

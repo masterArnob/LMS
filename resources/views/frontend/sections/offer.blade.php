@@ -9,8 +9,8 @@
                 <div class="col-xl-6 col-md-6 wow fadeInRight">
                     <div class="wsus__offer_text">
                         <h2>Eager to Receive Special Offers & Updates on Courses?</h2>
-                        <form action="#">
-                            <input type="text" placeholder="Your email address...">
+                        <form class="subs">
+                            <input type="email" placeholder="Your email address..." name="email" required>
                             <button type="submit" class="common_btn">Subscribe</button>
                         </form>
                     </div>
