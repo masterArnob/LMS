@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\becomeInstructorSectionController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CourseLevelController;
 use App\Http\Controllers\Admin\CourseSubCategoryController;
@@ -32,6 +33,7 @@ Route::get('/', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
+Route::get('course-list', [HomeController::class, 'courseList'])->name('course.list');
 
 
 
@@ -52,6 +54,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::resource('course', AdminCourseController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('video-section', VideoSectionController::class);
     Route::resource('become-instructor-section', becomeInstructorSectionController::class);

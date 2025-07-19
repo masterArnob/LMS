@@ -215,6 +215,10 @@
                         Course Sub Category
                       </a>
 
+                          <a class="dropdown-item" href="{{ route('admin.course.index') }}">
+                        Courses
+                      </a>
+
 
 
              

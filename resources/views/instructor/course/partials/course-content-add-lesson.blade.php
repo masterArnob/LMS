@@ -122,8 +122,6 @@
             </form>
         </div>
     </div>
-  @push('scripts')
       <script>
            $('#lfm').filemanager('file');
       </script>
-  @endpush

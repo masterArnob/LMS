@@ -121,12 +121,8 @@
                     <a class="nav-link" href="about.html">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Courses <i class="far fa-angle-down"></i></a>
-                    <ul class="droap_menu">
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="courses_details.html">Course details</a></li>
-                        <li><a href="course_video.html">Course video</a></li>
-                    </ul>
+                    <a class="nav-link" href="{{ route('course.list') }}">Courses</a>
+               
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">pages <i class="far fa-angle-down"></i></a>
@@ -259,12 +255,8 @@
                                     </ul>
                                 </li>
                                 <li class="mobile_dropdown">
-                                    <a href="#">courses</a>
-                                    <ul class="inner_menu">
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="courses_details.html">Course details</a></li>
-                                        <li><a href="course_video.html">Course video</a></li>
-                                    </ul>
+                                    <a href="{{ route('course.list') }}">courses</a>
+                                 
                                 </li>
                                 <li class="mobile_dropdown">
                                     <a href="#">shop</a>

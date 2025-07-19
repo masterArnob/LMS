@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\AboutSection;
 use App\Models\becomeInstructorSection;
+use App\Models\Brand;
+use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Features;
 use App\Models\HeroSection;
@@ -23,13 +25,15 @@ class HomeController extends Controller
         $aboutSection = AboutSection::first();
         $becomeInstructorSection = becomeInstructorSection::first();
         $videoSection = VideoSection::first();
+        $brands = Brand::where('status', 'active')->orderBy('id', 'DESC')->get();
         return view('frontend.home', compact(
             'hero',
             'feature',
             'categories',
             'aboutSection',
             'becomeInstructorSection',
-            'videoSection'
+            'videoSection',
+            'brands'
         ));
     }
 
@@ -44,5 +48,16 @@ class HomeController extends Controller
        $subs->email = $request->email;
        $subs->save();
        return response(['status' => 'success', 'message' => 'You have successfully subscribed to our newsletter!']);
+    }
+
+
+
+    public function courseList(){
+        $courses = Course::with(['instructor', 'lessons'])
+        ->where(['status' => 'active', 'is_approved' => 'approved'])
+        ->orderBy('id', 'DESC')
+        ->get();
+       // dd($courses);
+        return view('frontend.pages.course-list', compact('courses'));
     }
 }
