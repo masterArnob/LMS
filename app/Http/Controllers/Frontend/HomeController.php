@@ -9,6 +9,7 @@ use App\Models\CourseCategory;
 use App\Models\Features;
 use App\Models\HeroSection;
 use App\Models\NewsLetter;
+use App\Models\VideoSection;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,13 +22,14 @@ class HomeController extends Controller
         ->get();
         $aboutSection = AboutSection::first();
         $becomeInstructorSection = becomeInstructorSection::first();
-
+        $videoSection = VideoSection::first();
         return view('frontend.home', compact(
             'hero',
             'feature',
             'categories',
             'aboutSection',
-            'becomeInstructorSection'
+            'becomeInstructorSection',
+            'videoSection'
         ));
     }
 

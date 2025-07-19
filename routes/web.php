@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\becomeInstructorSectionController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CourseLevelController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
@@ -50,6 +52,8 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::resource('brand', BrandController::class);
+    Route::resource('video-section', VideoSectionController::class);
     Route::resource('become-instructor-section', becomeInstructorSectionController::class);
     Route::resource('news-letter', NewsLetterController::class);
 

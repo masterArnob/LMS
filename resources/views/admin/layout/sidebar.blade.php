@@ -264,6 +264,15 @@
                        Become Instructor Section
                       </a>
 
+
+                          <a class="dropdown-item" href="{{ route('admin.video-section.index') }}">
+                       Video Section
+                      </a>
+
+                         <a class="dropdown-item" href="{{ route('admin.brand.index') }}">
+                       Trusted Brands Section
+                      </a>
+
                       
 
                       
