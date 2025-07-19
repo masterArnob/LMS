@@ -259,6 +259,13 @@
                         News Letter Section
                       </a>
 
+
+                          <a class="dropdown-item" href="{{ route('admin.become-instructor-section.index') }}">
+                       Become Instructor Section
+                      </a>
+
+                      
+
                       
 
                 

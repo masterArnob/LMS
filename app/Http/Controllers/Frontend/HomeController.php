@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\AboutSection;
+use App\Models\becomeInstructorSection;
 use App\Models\CourseCategory;
 use App\Models\Features;
 use App\Models\HeroSection;
@@ -19,12 +20,14 @@ class HomeController extends Controller
         ->orderBy('id', 'DESC')
         ->get();
         $aboutSection = AboutSection::first();
+        $becomeInstructorSection = becomeInstructorSection::first();
 
         return view('frontend.home', compact(
             'hero',
             'feature',
             'categories',
-            'aboutSection'
+            'aboutSection',
+            'becomeInstructorSection'
         ));
     }
 

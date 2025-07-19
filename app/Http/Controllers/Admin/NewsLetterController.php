@@ -62,6 +62,9 @@ class NewsLetterController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $sub = NewsLetter::findOrFail($id);
+        $sub->delete();
+        notyf()->success('Newsletter subscription deleted successfully!');
+        return response(['status' => 'success']);
     }
 }
