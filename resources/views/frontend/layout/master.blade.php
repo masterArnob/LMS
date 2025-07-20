@@ -178,6 +178,8 @@
      @vite(['resources/js/frontend.js'])
 
 <script>
+
+      
     
             var config = {
             routes: {

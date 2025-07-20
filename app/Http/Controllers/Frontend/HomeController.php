@@ -25,7 +25,12 @@ class HomeController extends Controller
         $aboutSection = AboutSection::first();
         $becomeInstructorSection = becomeInstructorSection::first();
         $videoSection = VideoSection::first();
-        $brands = Brand::where('status', 'active')->orderBy('id', 'DESC')->get();
+        $brands = Brand::where('status', 'active')
+        ->orderBy('id', 'DESC')
+        ->get();
+
+       
+
         return view('frontend.home', compact(
             'hero',
             'feature',
@@ -33,7 +38,7 @@ class HomeController extends Controller
             'aboutSection',
             'becomeInstructorSection',
             'videoSection',
-            'brands'
+            'brands',
         ));
     }
 
@@ -59,5 +64,13 @@ class HomeController extends Controller
         ->get();
        // dd($courses);
         return view('frontend.pages.course-list', compact('courses'));
+    }
+
+
+    public function courseDetails($slug){
+        $course = Course::where(['slug' => $slug, 'status' => 'active', 'is_approved' => 'approved'])
+        ->with(['instructor', 'lessons', 'courseLevel', 'courseLang'])
+        ->firstOrFail();
+        return view('frontend.pages.course-details', compact('course'));
     }
 }

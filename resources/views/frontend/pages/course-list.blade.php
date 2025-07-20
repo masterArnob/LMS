@@ -424,7 +424,7 @@
                                             </p>
                                         </div>
 
-                                        <a class="title" href="#">{{ $course->title }}</a>
+                                        <a class="title" href="{{ route('course.details', $course->slug) }}">{{ $course->title }}</a>
                                         <ul>
                                             <li>{{ $course->lessons->count() }} Lessons</li>
                                             <li>38 Student</li>

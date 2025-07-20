@@ -34,6 +34,7 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
 Route::get('course-list', [HomeController::class, 'courseList'])->name('course.list');
+Route::get('course-details/{slug}', [HomeController::class, 'courseDetails'])->name('course.details');
 
 
 

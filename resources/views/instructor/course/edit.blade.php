@@ -106,7 +106,8 @@
                   <div class="col-xl-12">
                       <div class="add_course_basic_info_imput mb-0">
                           <label for="#">Description</label>
-                          <textarea rows="8" placeholder="Description" name="description" required>{!! $course->description !!}</textarea>
+                             <textarea name="description" class="form-control summernote" rows="5" required>{!! $course->description !!}</textarea>
+
                           @error('description')
                               <span class="text-danger">{{ $message }}</span>
                           @enderror

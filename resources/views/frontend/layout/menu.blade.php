@@ -9,108 +9,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="menu_category">
                 <div class="icon">
-                    <img src="{{ asset('frontend/images/grid_icon.png') }}" alt="Category" class="img-fluid">
+                    <img src="{{ asset('uploads/default-files/grid_icon.png') }}" alt="Category" class="img-fluid">
                 </div>
                 Category
                 <ul>
-                    <li>
+                    @php
+                         $cats = App\Models\CourseCategory::where('status', 'active')->orderBy('id', 'DESC')->get();
+                    @endphp
+                    @forelse ($cats as $cat)
+                             <li>
                         <a href="#">
                             <span>
-                                <img src="images/menu_category_icon_1.png" alt="Category" class="img-fluid">
+                                <img src="{{ $cat->image }}" alt="Category" class="img-fluid">
                             </span>
-                            Development
+                            {{ $cat->name }}
                         </a>
-                        <ul class="category_sub_menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">UI/UX Design</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
+               
                     </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                <img src="{{ asset('frontend/images/menu_category_icon_2.png') }}" alt="Category" class="img-fluid">
-                            </span>
-                            Business
-                        </a>
-                        <ul class="category_sub_menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">UI/UX Design</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                <img src="images/menu_category_icon_3.png" alt="Category" class="img-fluid">
-                            </span>
-                            Marketing
-                        </a>
-                        <ul class="category_sub_menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">UI/UX Design</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                <img src="images/menu_category_icon_4.png" alt="Category" class="img-fluid">
-                            </span>
-                            Lifestyle
-                        </a>
-                        <ul class="category_sub_menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">UI/UX Design</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                <img src="images/menu_category_icon_5.png" alt="Category" class="img-fluid">
-                            </span>
-                            Health & Fitness
-                        </a>
-                        <ul class="category_sub_menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">UI/UX Design</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                <img src="images/menu_category_icon_6.png" alt="Category" class="img-fluid">
-                            </span>
-                            Design
-                        </a>
-                        <ul class="category_sub_menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">UI/UX Design</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                <img src="images/menu_category_icon_7.png" alt="Category" class="img-fluid">
-                            </span>
-                            Academics
-                        </a>
-                        <ul class="category_sub_menu">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">UI/UX Design</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </li>
+                    @empty
+                        No Data Available
+                    @endforelse
+               
+                 
+                  
                 </ul>
             </div>
             <ul class="navbar-nav m-auto">
