@@ -1,4 +1,11 @@
 @extends('frontend.layout.master')
+@push('meta')
+    <meta property="og:title" content="{{ $course->title }}">
+    <meta property="og:description" content="{{ $course->description }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset($course->thumbnail) }}">
+    <meta property="og:type" content="Course">
+@endpush
 @section('content')
         <!--===========================
         BREADCRUMB START
@@ -92,102 +99,47 @@
                                 <div class="wsus__courses_curriculum box_area">
                                     <h3>Course Curriculum</h3>
                                     <div class="accordion" id="accordionExample">
-                                        <div class="accordion-item">
+                                        
+                                        @forelse ($course->chapters as $chapter)
+                                                <div class="accordion-item">
                                             <h2 class="accordion-header">
                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne" aria-expanded="true"
-                                                    aria-controls="collapseOne">
-                                                    Course Prelude & EduCore Learning Presentation
+                                                    data-bs-target="#collapse-{{ $chapter->id }}" aria-expanded="true"
+                                                    aria-controls="collapse-{{ $chapter->id }}">
+                                                    {{ $chapter->title }}
                                                 </button>
                                             </h2>
-                                            <div id="collapseOne" class="accordion-collapse collapse show"
+                                            <div id="collapse-{{ $chapter->id }}" class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
                                                 data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
                                                     <ul>
-                                                        <li class="active">
-                                                            <p>Brush up on Java concepts</p>
-                                                            <span class="right_text">Preview</span>
+                                                        @forelse ($chapter->lessons as $lesson)
+                                                             <li class="{{ $lesson->is_preview === 'yes' ? 'active' : '' }}">
+                                                            <p>{{ $lesson->title }}</p>
+                                                            @if ($lesson->is_preview === 'yes')
+                                                           <a href="{{ $lesson->file_path }}" data-autoplay="true" data-vbtype="video" class="right_text venobox vbox-item">Preview</a>   
+                                                            @else
+                                                                 <span class="right_text">{{ convertMinutesToHours($lesson->duration) }}</span>
+                                                            @endif
+                                                          
                                                         </li>
-                                                        <li>
-                                                            <a href="">User Experience Fundamentals Course</a>
-                                                            <span class="right_text">24 minutes</span>
-                                                        </li>
-                                                        <li>
-                                                            <p>Brisk Guide to Using Pivot Tables in Excel</p>
-                                                            <span class="right_text">7 minutes</span>
-                                                        </li>
-                                                        <li>
-                                                            <p>User-Centric Design Fundamentals</p>
-                                                            <span class="right_text">21 minutes</span>
-                                                        </li>
+                                                        @empty
+                                                            No Data Available
+                                                        @endforelse
+                                                       
+                                              
+                                                   
+                                                       
+                                                    
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                    aria-expanded="false" aria-controls="collapseTwo">
-                                                    Essential HTML Building Elements
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo" class="accordion-collapse collapse"
-                                                data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li class="active">
-                                                            <p>Brush up on Java concepts</p>
-                                                            <span class="right_text">Preview</span>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">User Experience Fundamentals Course</a>
-                                                            <span class="right_text">24 minutes</span>
-                                                        </li>
-                                                        <li>
-                                                            <p>Brisk Guide to Using Pivot Tables in Excel</p>
-                                                            <span class="right_text">7 minutes</span>
-                                                        </li>
-                                                        <li>
-                                                            <p>User-Centric Design Fundamentals</p>
-                                                            <span class="right_text">21 minutes</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                    aria-expanded="false" aria-controls="collapseThree">
-                                                    Fundamental Programming Idea
-                                                </button>
-                                            </h2>
-                                            <div id="collapseThree" class="accordion-collapse collapse"
-                                                data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li class="active">
-                                                            <p>Brush up on Java concepts</p>
-                                                            <span class="right_text">Preview</span>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">User Experience Fundamentals Course</a>
-                                                            <span class="right_text">24 minutes</span>
-                                                        </li>
-                                                        <li>
-                                                            <p>Brisk Guide to Using Pivot Tables in Excel</p>
-                                                            <span class="right_text">7 minutes</span>
-                                                        </li>
-                                                        <li>
-                                                            <p>User-Centric Design Fundamentals</p>
-                                                            <span class="right_text">21 minutes</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @empty
+                                            No Data Available
+                                        @endforelse
+                                    
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -572,10 +524,10 @@
                         <div class="wsus__courses_sidebar_share_area">
                             <span>Share:</span>
                             <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                                <li class="ez-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li class="ez-linkedin"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li class="ez-x"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="ez-reddit"><a href="#"><i class="fab fa-reddit"></i></a></li>
                             </ul>
                         </div>
                         <div class="wsus__courses_sidebar_info">
@@ -637,3 +589,6 @@
         COURSES DETAILS END
     ============================-->
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/gh/shakilahmed0369/ez-share/dist/ez-share.min.js"></script>
+@endpush

@@ -40,3 +40,9 @@ $('.subs').on('submit', function(e){
                 ['insert', ['link', 'picture', 'video']]
             ]
         });
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  ezShare.execute();
+});

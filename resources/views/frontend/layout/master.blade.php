@@ -9,6 +9,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @stack('meta')
     <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">

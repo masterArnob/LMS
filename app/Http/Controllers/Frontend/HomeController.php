@@ -69,7 +69,7 @@ class HomeController extends Controller
 
     public function courseDetails($slug){
         $course = Course::where(['slug' => $slug, 'status' => 'active', 'is_approved' => 'approved'])
-        ->with(['instructor', 'lessons', 'courseLevel', 'courseLang'])
+        ->with(['instructor', 'lessons', 'courseLevel', 'courseLang', 'chapters'])
         ->firstOrFail();
 
         $courseCount = Course::where(['status' => 'active', 'is_approved' => 'approved'])
