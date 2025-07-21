@@ -71,6 +71,9 @@ class HomeController extends Controller
         $course = Course::where(['slug' => $slug, 'status' => 'active', 'is_approved' => 'approved'])
         ->with(['instructor', 'lessons', 'courseLevel', 'courseLang'])
         ->firstOrFail();
-        return view('frontend.pages.course-details', compact('course'));
+
+        $courseCount = Course::where(['status' => 'active', 'is_approved' => 'approved'])
+        ->count();
+        return view('frontend.pages.course-details', compact('course', 'courseCount'));
     }
 }
