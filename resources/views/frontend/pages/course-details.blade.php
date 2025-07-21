@@ -583,7 +583,7 @@
                             <ul>
                                 <li>
                                     <span><img src="{{ asset('uploads/default-files/video_icon_black.png') }}" alt="video" class="img-fluid"></span>
-                                    54 min 24 sec Video Lectures
+                                     {{ convertMinutesToHours($course->duration) }} Video Lectures
                                 </li>
                               
                                 @if ($course->certificate == 1)
