@@ -1,7 +1,7 @@
 @extends('frontend.layout.master')
 @push('meta')
     <meta property="og:title" content="{{ $course->title }}">
-    <meta property="og:description" content="{{ $course->description }}">
+    <meta property="og:description" content="{!! $course->description !!}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="{{ asset($course->thumbnail) }}">
     <meta property="og:type" content="Course">
@@ -31,6 +31,7 @@
                                     By {{ $course->instructor->name }}
                                 </li>
                                 <li>
+                               
                                     <span><img src="{{ asset($course->category->icon) }}" alt="Globe" class="img-fluid"></span>
                                     {{ $course->category->name }}
                                 </li>
@@ -516,7 +517,7 @@
                                     {{ $course->courseLang->name }}
                                 </li>
                             </ul>
-                            <a class="common_btn" href="#">Enroll The Course <i class="far fa-arrow-right"></i></a>
+                            <a class="common_btn add_to_cart" data-course-id="{{ $course->id }}" href="#">Enroll The Course <i class="far fa-arrow-right"></i></a>
                         </div>
                         <div class="wsus__courses_sidebar_share_btn d-flex flex-wrap justify-content-between">
                             <a href="#" class="common_btn"><i class="far fa-heart"></i> Add to Wishlist</a>

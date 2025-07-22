@@ -1,4 +1,6 @@
+import './cart.js';
 var notyf = new Notyf();
+
 $('.subs').on('submit', function(e){
     e.preventDefault();
     let email = $(this).find('input[name="email"]').val();

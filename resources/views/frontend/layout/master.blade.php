@@ -194,6 +194,7 @@
                 deleteLesson: "{{ route('instructor.course-content-chapter-lesson.delete') }}",
                 deleteCourse: "{{ route('instructor.course.delete') }}",
                 subscribe: "{{ route('subscribe') }}",
+                addToCart: "{{ route('cart.add') }}"
             },
            // icon: {
             //    currency_icon: "{{ $settings->currency_icon ?? '$' }}",

@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
 use App\Http\Controllers\Admin\VideoSectionController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
@@ -35,7 +36,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
 Route::get('course-list', [HomeController::class, 'courseList'])->name('course.list');
 Route::get('course-details/{slug}', [HomeController::class, 'courseDetails'])->name('course.details');
-
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('remove-item-cart/{cart_item_id}', [CartController::class, 'removeItemCart'])->name('cart.remove');
 
 
 
@@ -133,6 +136,7 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
+
 
     Route::resource('profile', StudentProfileController::class);
     Route::post('logout', [StudentDashboardController::class, 'destroy'])
