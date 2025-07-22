@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index(){
+        if(!Auth::check()){
+           $cartItems = collect();
+             return view('frontend.pages.cart.index', compact('cartItems'));
+        }
         $cartItems = Cart::with('course')
         ->where('user_id', Auth::user()->id)
         ->get();
+
         return view('frontend.pages.cart.index', compact('cartItems'));
     }
 
@@ -36,7 +41,8 @@ class CartController extends Controller
         $cart->course_id = $request->course_id;
         $cart->save();
 
-        return response(['status' => 'success', 'message' => 'Course added to cart successfully.']);
+        $cartCount = cartCount();
+        return response(['status' => 'success', 'message' => 'Course added to cart successfully.', 'cartCount' => $cartCount]);
     }
 
 

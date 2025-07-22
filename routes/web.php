@@ -14,8 +14,10 @@ use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\Admin\TopBarSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
@@ -44,7 +46,6 @@ Route::get('remove-item-cart/{cart_item_id}', [CartController::class, 'removeIte
 
 
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -58,6 +59,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::resource('topbar-section', TopBarSectionController::class);
     Route::resource('course', AdminCourseController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('video-section', VideoSectionController::class);
@@ -138,6 +140,7 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
 Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
 
 
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::resource('profile', StudentProfileController::class);
     Route::post('logout', [StudentDashboardController::class, 'destroy'])
         ->name('logout');

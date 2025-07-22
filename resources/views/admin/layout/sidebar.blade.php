@@ -245,6 +245,11 @@
                 <div class="dropdown-menu">
                   <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
+                             <a class="dropdown-item" href="{{ route('admin.topbar-section.index') }}">
+                        Topbar Section 
+                      </a>
+
+
                     <a class="dropdown-item" href="{{ route('admin.hero-section.index') }}">
                         Hero Section 
                       </a>

@@ -16,6 +16,7 @@ $(document).on('click', '.add_to_cart', function(e){
         },
         success: function(data){
             if(data.status === 'success'){
+                $('.cartCount').text(data.cartCount);
                 notyf.success(data.message);
             }
             else if(data.status === 'error'){

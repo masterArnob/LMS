@@ -15,7 +15,6 @@ if(!function_exists('convertMinutesToHours')) {
 
 
 if(!function_exists('cartTotal')) {
- 
     function cartTotal(){
         $total = 0;
         $items = Cart::where('user_id', Auth::user()->id)->get();
@@ -28,6 +27,16 @@ if(!function_exists('cartTotal')) {
         }
 
         return $total;
+    }
+
+}
+
+
+
+if(!function_exists('cartCount')) {
+    function cartCount(){
+        $count = Cart::where('user_id', Auth::user()?->id)->count();
+        return $count;
     }
 
 }
