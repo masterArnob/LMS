@@ -1,6 +1,7 @@
 @php
     $section = App\Models\TopBarSection::first();
 @endphp
+@if (!empty($section))
 <header class="header_3">
         <div class="row">
             <div class="col-xxl-4 col-lg-7 col-md-8 d-none d-md-block">
@@ -18,4 +19,8 @@
             </div>
         
         </div>
-    </header>
+</header>
+
+@else
+please add a top bar section from the admin panel.
+@endif

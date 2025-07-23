@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
@@ -138,6 +139,17 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
+
+
+    /**
+     * Payment Routes 
+     */
+    Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
+    Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
+    Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
+    /**
+     * Payment Routes
+     */
 
 
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
