@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentSettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PaymentSettingsController extends Controller
 {
@@ -31,6 +32,7 @@ class PaymentSettingsController extends Controller
             );
         }
 
+        Cache::forget('gatewaySettings');
         notyf()->success('Paypal settings updated successfully.');
         return redirect()->back();
 

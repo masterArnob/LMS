@@ -17,13 +17,15 @@
                     <!-- Round Text & Stats Section -->
                     <div class="mb-4">
             
+              
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Paypal Mode</label>
                                 <select name="PAYPAL_MODE" class="form-control">
+                                   
                                     <option value="">Select</option>
-                                    <option value="sandbox">Sandbox</option>
-                                     <option value="live">Live</option>
+                                    <option @selected(config('gatewaySettings.PAYPAL_MODE') == 'sandbox') value="sandbox">Sandbox</option>
+                                    <option @selected(config('gatewaySettings.PAYPAL_MODE') == 'live') value="live">Live</option>
                                 </select>
                                 @error('PAYPAL_MODE')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -35,7 +37,7 @@
                                 <select name="PAYPAL_CURRENCY" class="js-example-basic form-control">
                                     <option value="">Select</option>
                                     @forelse (config('gateway_currencies.paypal_currencies') as $key => $value)
-                                          <option value="{{ $value['code'] }}">{{ $value['code'] }}</option>
+                                          <option @selected(config('gatewaySettings.PAYPAL_CURRENCY') == $value['code']) value="{{ $value['code'] }}">{{ $value['code'] }}</option>
                                     @empty
                                         <option value="">No Data Available</option>
                                     @endforelse
@@ -47,7 +49,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Paypal Rate</label>
-                                <input type="text" name="PAYPAL_RATE" value="" 
+                                <input type="text" name="PAYPAL_RATE" value="{{ config('gatewaySettings.PAYPAL_RATE') }}" 
                                        class="form-control" placeholder="e.g. Active Learners">
                                 @error('PAYPAL_RATE')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -69,7 +71,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Paypal Client ID</label>
-                                <input type="text" name="PAYPAL_CLIENT_ID" value="" 
+                                <input type="text" name="PAYPAL_CLIENT_ID" value="{{ config('gatewaySettings.PAYPAL_CLIENT_ID') }}" 
                                        class="form-control" placeholder="e.g. Get Started">
                                 @error('PAYPAL_CLIENT_ID')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -78,7 +80,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Paypal Client Secret</label>
-                                <input type="text" name="PAYPAL_CLIENT_SECRET" value="" 
+                                <input type="text" name="PAYPAL_CLIENT_SECRET" value="{{ config('gatewaySettings.PAYPAL_CLIENT_SECRET') }}" 
                                        class="form-control" placeholder="e.g. https://example.com/register">
                                 @error('PAYPAL_CLIENT_SECRET')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>

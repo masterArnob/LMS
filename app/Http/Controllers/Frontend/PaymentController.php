@@ -10,12 +10,38 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PaymentController extends Controller
 {
+
+
+
+    public function paypalConfig()
+    {
+
+        return [
+            'mode'    => config('gatewaySettings.PAYPAL_MODE'), // Can only be 'sandbox' Or 'live'. If empty or invalid, 'live' will be used.
+            'sandbox' => [
+                'client_id'         => config('gatewaySettings.PAYPAL_CLIENT_ID'),
+                'client_secret'     => config('gatewaySettings.PAYPAL_CLIENT_SECRET'),
+                'app_id'            => 'APP-80W284485P519543T',
+            ],
+            'live' => [
+                'client_id'         => config('gatewaySettings.PAYPAL_CLIENT_ID'),
+                'client_secret'     => config('gatewaySettings.PAYPAL_CLIENT_SECRET'),
+                'app_id'            => 'app-id',
+            ],
+
+            'payment_action' => "Sale",
+            'currency'       => config('gatewaySettings.PAYPAL_CURRENCY'),
+            'notify_url'     => '',
+            'locale'         => 'en_US',
+            'validate_ssl'   => true,
+        ];
+    }
     function payWithPaypal()
     {
-        $provider = new PayPalClient();
+        $provider = new PayPalClient($this->paypalConfig());
         $provider->getAccessToken();
 
-     $payableAmount = cartTotal();
+        $payableAmount = cartTotal();
 
         $response = $provider->createOrder([
             'intent' => 'CAPTURE',
@@ -45,7 +71,7 @@ class PaymentController extends Controller
     function paypalSuccess(Request $request)
     {
 
-        $provider = new PayPalClient();
+        $provider = new PayPalClient($this->paypalConfig());
         $provider->getAccessToken();
 
         $response = $provider->capturePaymentOrder($request->token);
@@ -58,7 +84,7 @@ class PaymentController extends Controller
             $paidAmount = $capture['amount']['value'];
             $currency = $capture['amount']['currency_code'];
 
-            try{
+            try {
                 orderService::storeOrder(
                     $transactionId,
                     $mainAmount,
@@ -70,16 +96,15 @@ class PaymentController extends Controller
                 );
                 notyf()->success('Payment successful. Order has been placed successfully.');
                 return to_route('student.order.success');
-            }catch(\Throwable $th){
+            } catch (\Throwable $th) {
                 throw $th;
             }
         }
-
-
     }
 
-     
-     public function paypalCancel(){
+
+    public function paypalCancel()
+    {
         return 'Payment cancelled error.';
-     }
+    }
 }
