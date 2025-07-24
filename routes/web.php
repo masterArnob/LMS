@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
@@ -140,6 +141,9 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
 
+
+
+    Route::get('order/success', [OrderController::class, 'success'])->name('order.success');
 
     /**
      * Payment Routes 
