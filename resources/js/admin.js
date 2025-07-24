@@ -1,42 +1,34 @@
 // for changing the profile image in admin panel
-     $(document).on("change", "#image", function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $("#showImage").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(e.target.files[0]);
+$(document).on("change", "#image", function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#showImage").attr("src", e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
 });
 // for changing the profile image in admin panel
 
-
-
-
-
-     $(document).on("change", "#image_one", function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $("#showImage_one").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(e.target.files[0]);
+$(document).on("change", "#image_one", function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#showImage_one").attr("src", e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
 });
-     $(document).on("change", "#image_two", function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $("#showImage_two").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(e.target.files[0]);
+$(document).on("change", "#image_two", function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#showImage_two").attr("src", e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
 });
-     $(document).on("change", "#image_three", function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $("#showImage_three").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(e.target.files[0]);
+$(document).on("change", "#image_three", function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#showImage_three").attr("src", e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
 });
-
-
-
-
 
 var notyf = new Notyf();
 
@@ -65,32 +57,38 @@ $(document).on("click", ".delete-confirm", function (e) {
         url: delete_url,
         method: "DELETE",
         success: function (data) {
-            if(data.status === 'success'){
-                 window.location.reload();
-            }else if(data.status === 'error'){
-                 window.location.reload();
+            if (data.status === "success") {
+                window.location.reload();
+            } else if (data.status === "error") {
+                window.location.reload();
             }
         },
-error: function (xhr, status, error) {
-    // Log error details to console for debugging
-    console.log('Error:', error);
-    console.log('Status:', status);
-    console.log('XHR:', xhr);
+        error: function (xhr, status, error) {
+            // Log error details to console for debugging
+            console.log("Error:", error);
+            console.log("Status:", status);
+            console.log("XHR:", xhr);
 
-    // Show specific error message
-    let errorMessage = xhr.responseJSON?.message || `Error: ${xhr.status} ${xhr.statusText}`;
-    notyf.error(errorMessage);
-}
+            // Show specific error message
+            let errorMessage =
+                xhr.responseJSON?.message ||
+                `Error: ${xhr.status} ${xhr.statusText}`;
+            notyf.error(errorMessage);
+        },
     });
 });
 
+$(".summernote").summernote({
+    height: 200,
+    toolbar: [
+        ["style", ["bold", "italic", "underline", "clear"]],
+        ["font", ["strikethrough", "superscript", "subscript"]],
+        ["para", ["ul", "ol", "paragraph"]],
+        ["insert", ["link", "picture", "video"]],
+    ],
+});
 
-     $('.summernote').summernote({
-            height: 200,
-            toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['insert', ['link', 'picture', 'video']]
-            ]
-        });
+$(document).ready(function () {
+    $(".js-example-basic").select2();
+    
+});

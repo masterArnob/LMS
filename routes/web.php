@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\Admin\PaymentSettingsController;
 use App\Http\Controllers\Admin\TopBarSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Frontend\CartController;
@@ -61,6 +62,8 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::post('payment-settings', [PaymentSettingsController::class, 'paypalSettingUpdate'])->name('payment-settings.paypal-update');
+    Route::get('payment-settings', [PaymentSettingsController::class, 'index'])->name('payment-settings.index');
     Route::resource('topbar-section', TopBarSectionController::class);
     Route::resource('course', AdminCourseController::class);
     Route::resource('brand', BrandController::class);

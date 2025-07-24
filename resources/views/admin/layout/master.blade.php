@@ -44,7 +44,7 @@
     <link href="{{ asset('admin/dist/css/demo.min.css?1692870487') }}" rel="stylesheet" />
 
     {{-- select 2 css --}}
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/select2.min.css') }}">
   {{-- select 2 css --}}
 
     <!-- CSRF Token -->
@@ -243,7 +243,7 @@
 
 
   {{-- select 2 js --}}
-  <script src="{{ asset('frontend/assets/js/select2.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/select2.min.js') }}"></script>
   {{-- select 2 js --}}
 
 
