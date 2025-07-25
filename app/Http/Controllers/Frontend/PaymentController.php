@@ -7,6 +7,8 @@ use App\Service\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Stripe\Checkout\Session as StripeSession;
+use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
@@ -38,10 +40,14 @@ class PaymentController extends Controller
     }
     function payWithPaypal()
     {
+        if (config('gatewaySettings.paypal_status') != 'enable') {
+            notyf()->error('Paypal payment gateway is disabled.');
+            return to_route('student.checkout.index');
+        }
         $provider = new PayPalClient($this->paypalConfig());
         $provider->getAccessToken();
 
-        $payableAmount = cartTotal();
+        $payableAmount = cartTotal() * config('gatewaySettings.paypal_rate');
 
         $response = $provider->createOrder([
             'intent' => 'CAPTURE',
@@ -104,6 +110,82 @@ class PaymentController extends Controller
 
 
     public function paypalCancel()
+    {
+        return 'Payment cancelled error.';
+    }
+
+
+
+
+
+
+
+
+
+    function payWithStripe()
+    {
+        if(config('gatewaySettings.stripe_status') != 'enable') {
+            notyf()->error('Stripe payment gateway is disabled.');
+            return to_route('student.checkout.index');
+        }
+        Stripe::setApiKey(config('gatewaySettings.STRIPE_SECRET_KEY'));
+
+        $payableAmount = (cartTotal() * 100) * config('gatewaySettings.STRIPE_RATE');
+        $quantityCount = cartCount();
+
+        $response = StripeSession::create([
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => config('gatewaySettings.STRIPE_CURRENCY'),
+                        'product_data' => [
+                            'name' => 'Course'
+                        ],
+                        'unit_amount' => $payableAmount
+                    ],
+                    'quantity' => $quantityCount
+                ]
+            ],
+            'mode' => 'payment',
+            'success_url' => route('student.stripe.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('student.stripe.cancel')
+        ]);
+
+        return redirect()->away($response->url);
+    }
+
+    function stripeSuccess(Request $request)
+    {
+        Stripe::setApiKey(config('gatewaySettings.STRIPE_SECRET_KEY'));
+
+        $response = StripeSession::retrieve($request->session_id);
+        if ($response->payment_status === 'paid') {
+            $transactionId = $response->payment_intent;
+            $mainAmount = cartTotal();
+            $paidAmount = $response->amount_total / 100;
+            $currency = $response->currency;
+
+            try {
+                OrderService::storeOrder(
+                    $transactionId,
+                    $mainAmount,
+                    $paidAmount,
+                    $currency,
+                    'stripe',
+                    Auth::user()->id,
+                    'approved',
+                );
+
+                return redirect()->route('student.order.success');
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
+        return redirect()->route('student.order.failed');
+    }
+
+
+    public function stripeCancel()
     {
         return 'Payment cancelled error.';
     }

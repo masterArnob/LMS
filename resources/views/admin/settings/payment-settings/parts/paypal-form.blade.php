@@ -87,6 +87,21 @@
                                 @enderror
                             </div>
 
+
+
+                                 <div class="col-md-6 mb-3">
+                                <label class="form-label">Status</label>
+                                   <select name="paypal_status" class="form-control">
+                                   
+                                    <option value="">Select</option>
+                                    <option @selected(config('gatewaySettings.paypal_status') == 'enable') value="enable">Enable</option>
+                                    <option @selected(config('gatewaySettings.paypal_status') == 'disable') value="disable">Disable</option>
+                                </select>
+                                @error('paypal_status')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                   
                         </div>
                     </div>

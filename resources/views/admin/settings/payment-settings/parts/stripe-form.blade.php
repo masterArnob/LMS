@@ -1,50 +1,41 @@
     <h4>Stripe Config</h4>
-            <form action="{{ route('admin.topbar-section.update', 1) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.payment-settings.stripe-update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
-                    
-             
+           
 
                     <!-- Round Text & Stats Section -->
                     <div class="mb-4">
             
+              
                         <div class="row">
+                        
+
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" name="email" value="" 
-                                       class="form-control" placeholder="e.g. Web Development">
-                                @error('email')
+                                <label class="form-label">Stripe Currency</label>
+                                <select name="STRIPE_CURRENCY" class="js-example-basic form-control">
+                                    <option value="">Select</option>
+                                    @forelse (config('gateway_currencies.stripe_currencies') as $key => $value)
+                                          <option @selected(config('gatewaySettings.STRIPE_CURRENCY') == $value) value="{{ $value }}">{{ $value }}</option>
+                                    @empty
+                                        <option value="">No Data Available</option>
+                                    @endforelse
+                                </select>
+                                @error('STRIPE_CURRENCY')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Phone</label>
-                                <input type="tel" name="phone" value="" 
-                                       class="form-control" placeholder="e.g. 5000+">
-                                @error('phone')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Offer Name</label>
-                                <input type="text" name="offer_name" value="" 
+                                <label class="form-label">Stripe Rate</label>
+                                <input type="text" name="STRIPE_RATE" value="{{ config('gatewaySettings.STRIPE_RATE') }}" 
                                        class="form-control" placeholder="e.g. Active Learners">
-                                @error('offer_name')
+                                @error('STRIPE_RATE')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
 
-                               <div class="col-md-6 mb-3">
-                                <label class="form-label">Offer Short Description</label>
-                                <input type="text" name="offer_short_description" value="" 
-                                       class="form-control" placeholder="e.g. About Our Platform">
-                                @error('offer_short_description')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
+                    
                         </div>
                     </div>
 
@@ -54,22 +45,37 @@
 
                     <!-- Button & Video Section -->
                     <div class="mb-4">
-                        <h3 class="mb-3">Button</h3>
+                        <h3 class="mb-3">Client ID & Secret</h3>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Button Text</label>
-                                <input type="text" name="offer_button_text" value="" 
+                                <label class="form-label">Stripe Publishable key</label>
+                                <input type="text" name="STRIPE_PUBLISHABLE_KEY" value="{{ config('gatewaySettings.STRIPE_PUBLISHABLE_KEY') }}" 
                                        class="form-control" placeholder="e.g. Get Started">
-                                @error('offer_button_text')
+                                @error('STRIPE_PUBLISHABLE_KEY')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Button URL</label>
-                                <input type="url" name="offer_button_url" value="" 
+                                <label class="form-label">Stripe Secret key</label>
+                                <input type="text" name="STRIPE_SECRET_KEY" value="{{ config('gatewaySettings.STRIPE_SECRET_KEY') }}" 
                                        class="form-control" placeholder="e.g. https://example.com/register">
-                                @error('offer_button_url')
+                                @error('STRIPE_SECRET_KEY')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+
+                                 <div class="col-md-6 mb-3">
+                                <label class="form-label">Stripe Status</label>
+                                   <select name="stripe_status" class="form-control">
+                                   
+                                    <option value="">Select</option>
+                                    <option @selected(config('gatewaySettings.stripe_status') == 'enable') value="enable">Enable</option>
+                                    <option @selected(config('gatewaySettings.stripe_status') == 'disable') value="disable">Disable</option>
+                                </select>
+                                @error('stripe_status')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>

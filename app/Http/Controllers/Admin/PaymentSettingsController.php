@@ -22,7 +22,8 @@ class PaymentSettingsController extends Controller
             'PAYPAL_CURRENCY' => ['required'],
             'PAYPAL_RATE' => ['required', 'numeric'],
             'PAYPAL_CLIENT_ID' => ['required'],
-            'PAYPAL_CLIENT_SECRET' => ['required']
+            'PAYPAL_CLIENT_SECRET' => ['required'],
+            'paypal_status' => ['required', 'in:enable,disable'],
         ]);
 
         foreach($validatedData as $key => $value){
@@ -36,5 +37,29 @@ class PaymentSettingsController extends Controller
         notyf()->success('Paypal settings updated successfully.');
         return redirect()->back();
 
+    }
+
+
+
+    public function stripeSettingUpdate(Request $request){
+        //dd($request->all());
+           $validatedData = $request->validate([
+            'STRIPE_CURRENCY' => ['required'],
+            'STRIPE_RATE' => ['required', 'numeric'],
+            'STRIPE_PUBLISHABLE_KEY' => ['required'],
+            'STRIPE_SECRET_KEY' => ['required'],
+            'stripe_status' => ['required', 'in:enable,disable'],
+        ]);
+
+        foreach($validatedData as $key => $value){
+            PaymentSettings::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        Cache::forget('gatewaySettings');
+        notyf()->success('Stripe settings updated successfully.');
+        return redirect()->back();
     }
 }

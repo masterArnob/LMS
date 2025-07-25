@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +35,10 @@ class CartController extends Controller
 
         if(Auth::user()->role !== 'student'){
             return response(['status' => 'error', 'message' => 'Only students can add courses to the cart.'], 403);
+        }
+
+        if(Enrollment::where(['user_id' => Auth::user()->id, 'course_id' => $request->course_id])->exists()){
+            return response(['status' => 'error', 'message' => 'This course is already enrolled.'], 400);
         }
 
         $cart = new Cart();

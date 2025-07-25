@@ -40,8 +40,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-6 col-md-4 wow fadeInUp">
-                                <a href="#" class="payment_mathod" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
+                                <a href="{{ route('student.stripe.payment') }}" class="payment_mathod" >
                                     <img src="{{ asset('uploads/default-files/stripe.png') }}" alt="payment" class="img-fluid w-100">
                                 </a>
                             </div>

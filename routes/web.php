@@ -62,8 +62,11 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
-    Route::post('payment-settings', [PaymentSettingsController::class, 'paypalSettingUpdate'])->name('payment-settings.paypal-update');
+    Route::post('payment-settings/stripe', [PaymentSettingsController::class, 'stripeSettingUpdate'])->name('payment-settings.stripe-update');
+    Route::post('payment-settings/paypal', [PaymentSettingsController::class, 'paypalSettingUpdate'])->name('payment-settings.paypal-update');
     Route::get('payment-settings', [PaymentSettingsController::class, 'index'])->name('payment-settings.index');
+
+
     Route::resource('topbar-section', TopBarSectionController::class);
     Route::resource('course', AdminCourseController::class);
     Route::resource('brand', BrandController::class);
@@ -151,6 +154,13 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefi
     /**
      * Payment Routes 
      */
+
+    Route::get('stripe/payment', [PaymentController::class, 'payWithStripe'])->name('stripe.payment');
+    Route::get('stripe/success', [PaymentController::class, 'stripeSuccess'])->name('stripe.success');
+    Route::get('stripe/cancel', [PaymentController::class, 'stripeCancel'])->name('stripe.cancel');
+
+
+
     Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
     Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
     Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
