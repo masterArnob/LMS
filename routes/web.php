@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PaymentSettingsController;
 use App\Http\Controllers\Admin\TopBarSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
@@ -68,6 +69,12 @@ Route::middleware('auth')->group(function () {
 
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+
+
+
+    Route::get('orders/show/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
+    Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+
 
     Route::post('payment-settings/ssl', [PaymentSettingsController::class, 'sslSettingUpdate'])->name('payment-settings.ssl-update');
     Route::post('payment-settings/stripe', [PaymentSettingsController::class, 'stripeSettingUpdate'])->name('payment-settings.stripe-update');
