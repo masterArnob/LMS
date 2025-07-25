@@ -26,12 +26,12 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-6">
-                    <p class="h3">Company</p>
+                    <p class="h3">{{ config('settings.site_name') }}</p>
                     <address>
-                      Street Address<br>
-                      State, City<br>
-                      Region, Postal Code<br>
-                      ltd@example.com
+                      {{ config('settings.location') }}<br>
+                      {{ config('settings.phone') }}<br>
+                      {{ config('settings.email') }}<br>
+              
                     </address>
                   </div>
                   <div class="col-6 text-end">

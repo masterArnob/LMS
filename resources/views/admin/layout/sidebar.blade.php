@@ -5,7 +5,7 @@
           </button>
           <h1 class="navbar-brand navbar-brand-autodark">
             <a href=".">
-                site name
+                {{ config('settings.site_name') }}
              {{--  <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image"> --}}
             </a>
           </h1>
@@ -336,6 +336,10 @@
                     <div class="dropdown-menu-column">
                              <a class="dropdown-item" href="{{ route('admin.payment-settings.index') }}">
                         Payment Settings 
+                      </a>
+
+                          <a class="dropdown-item" href="{{ route('admin.general-settings.index') }}">
+                        Site Settings 
                       </a>
 
 

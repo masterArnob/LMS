@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PaymentSettingsController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TopBarSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Frontend\CartController;
@@ -70,6 +71,9 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::get('site-settings/logo-settings', [SettingsController::class, 'logoSettings'])->name('logo-settings.index');
+    Route::post('general-settings/update', [SettingsController::class, 'generalSettingsUpdate'])->name('general-settings.update');
+    Route::get('general-settings', [SettingsController::class, 'generalSettings'])->name('general-settings.index');
 
 
     Route::get('orders/show/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
