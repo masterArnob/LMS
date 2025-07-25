@@ -31,6 +31,8 @@ use App\Http\Controllers\Student\StudentDashboardController;
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SslCommerzPaymentController;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,7 +47,12 @@ Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('remove-item-cart/{cart_item_id}', [CartController::class, 'removeItemCart'])->name('cart.remove');
 
-
+// SSLCOMMERZ Start
+Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('student.ssl.pay');
+Route::post('/success', [SslCommerzPaymentController::class, 'success'])->withoutMiddleware([VerifyCsrfToken::class]);;
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail'])->withoutMiddleware([VerifyCsrfToken::class]);;
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel'])->withoutMiddleware([VerifyCsrfToken::class]);;
+//SSLCOMMERZ END
 
 
 
@@ -62,6 +69,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::post('payment-settings/ssl', [PaymentSettingsController::class, 'sslSettingUpdate'])->name('payment-settings.ssl-update');
     Route::post('payment-settings/stripe', [PaymentSettingsController::class, 'stripeSettingUpdate'])->name('payment-settings.stripe-update');
     Route::post('payment-settings/paypal', [PaymentSettingsController::class, 'paypalSettingUpdate'])->name('payment-settings.paypal-update');
     Route::get('payment-settings', [PaymentSettingsController::class, 'index'])->name('payment-settings.index');

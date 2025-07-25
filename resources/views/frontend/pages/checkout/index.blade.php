@@ -44,18 +44,15 @@
                                     <img src="{{ asset('uploads/default-files/stripe.png') }}" alt="payment" class="img-fluid w-100">
                                 </a>
                             </div>
+                       
                             <div class="col-xl-3 col-6 col-md-4 wow fadeInUp">
-                                <a href="#" class="payment_mathod" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    <img src="images/payment_3.png" alt="payment" class="img-fluid w-100">
-                                </a>
+                                <form action="{{ route('student.ssl.pay') }}" method="POST" class="payment_mathod">
+                                    @csrf
+                                       <button type="submit" class="img-fluid w-100 "> <img src="{{ asset('uploads/default-files/ssl.png') }}" alt="payment" class=""></button>
+                                </form>
+                              
                             </div>
-                            <div class="col-xl-3 col-6 col-md-4 wow fadeInUp">
-                                <a href="#" class="payment_mathod" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    <img src="images/payment_4.png" alt="payment" class="img-fluid w-100">
-                                </a>
-                            </div>
+                      
 
 
                             

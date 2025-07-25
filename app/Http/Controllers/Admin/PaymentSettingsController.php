@@ -62,4 +62,27 @@ class PaymentSettingsController extends Controller
         notyf()->success('Stripe settings updated successfully.');
         return redirect()->back();
     }
+
+
+
+    public function sslSettingUpdate(Request $request){
+            $validatedData = $request->validate([
+            'SSLCZ_TESTMODE' => ['required'],
+            'SSLCZ_RATE' => ['required', 'numeric'],
+            'SSLCZ_STORE_ID' => ['required'],
+            'SSLCZ_STORE_PASSWORD' => ['required'],
+            'ssl_status' => ['required', 'in:enable,disable'],
+        ]);
+
+        foreach($validatedData as $key => $value){
+            PaymentSettings::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        Cache::forget('gatewaySettings');
+        notyf()->success('SSLCommerz settings updated successfully.');
+        return redirect()->back();
+    }
 }
