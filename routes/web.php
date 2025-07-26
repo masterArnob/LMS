@@ -71,6 +71,11 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+
+
+    Route::get('smtp-settings', [SettingsController::class, 'smtpSettings'])->name('smtp-settings.index');
+    Route::post('comission-settings/update', [SettingsController::class, 'comissionSettingsUpdate'])->name('comission-settings.update');
+    Route::get('comission-settings', [SettingsController::class, 'comissionSettings'])->name('comission-settings.index');
     Route::post('logo-settings/update', [SettingsController::class, 'logoSettingsUpdate'])->name('logo-settings.update');
     Route::get('site-settings/logo-settings', [SettingsController::class, 'logoSettings'])->name('logo-settings.index');
     Route::post('general-settings/update', [SettingsController::class, 'generalSettingsUpdate'])->name('general-settings.update');

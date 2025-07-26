@@ -99,4 +99,32 @@ class SettingsController extends Controller
         notyf()->success('Logo settings updated successfully.');
         return redirect()->back();
     }
+
+
+
+    public function comissionSettings(){
+        return view('admin.settings.site-settings.comission-settings');
+    }
+    public function comissionSettingsUpdate(Request $request){
+        
+        $validatedData = $request->validate([
+            'comission_rate' => ['required', 'numeric'],
+        ]);
+
+        foreach($validatedData as $key => $value){
+            Settings::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        Cache::forget('settings');
+        notyf()->success('Comission settings updated successfully.');
+        return redirect()->back();
+    }
+
+
+    public function smtpSettings(){
+        return view('admin.settings.site-settings.smtp-settings');
+    }
 }

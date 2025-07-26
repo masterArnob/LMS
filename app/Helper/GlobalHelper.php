@@ -54,3 +54,12 @@ if(!function_exists('sidebarItemActive')) {
         }
     }
 }
+
+
+
+if(!function_exists('calculateComission')) {
+    function calculateComission($amount, $comission) {
+        return $amount == 0 ? 0 : ($amount * $comission) / 100;
+    }
+}
+

@@ -30,8 +30,8 @@ class OrderService
             $orderItem->course_id = $item->course->id;
             $orderItem->qty = 1;
             $orderItem->price = $item->course->discount > 0 ? $item->course->discount : $item->course->price;
-            $orderItem->commission_rate = 1;
             $orderItem->item_type = 'course';
+            $orderItem->commission_rate = config('settings.comission_rate');
             $orderItem->save();
 
 
@@ -41,6 +41,11 @@ class OrderService
             $enroll->instructor_id = $item->course->instructor_id;
             $enroll->have_access = 1;
             $enroll->save();
+
+
+            $instructorWallet = $item->course->instructor;
+            $instructorWallet->wallet += calculateComission($item->course->discount > 0 ? $item->course->discount : $item->course->price, config('settings.comission_rate'));
+            $instructorWallet->save();
         }
 
         $cartItems->each(function($item){
