@@ -31,6 +31,14 @@
                 Orders
             </a>
         </li>
+          <li>
+            <a href="{{ route('instructor.withdraw.index') }}">
+                <div class="img">
+                    <img src="{{ asset('uploads/default-files/dash_icon_7.png') }}" alt="icon" class="img-fluid w-100">
+                </div>
+                Withdraws
+            </a>
+        </li>
         <li>
             <a href="dashboard_review.html">
                 <div class="img">
@@ -48,14 +56,7 @@
                 Students
             </a>
         </li>
-        <li>
-            <a href="dashboard_payout.html">
-                <div class="img">
-                    <img src="images/dash_icon_7.png" alt="icon" class="img-fluid w-100">
-                </div>
-                Payouts
-            </a>
-        </li>
+      
         <li>
             <a href="dashboard_support.html">
                 <div class="img">
