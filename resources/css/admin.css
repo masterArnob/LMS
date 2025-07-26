@@ -1,0 +1,17 @@
+.nav-item.dropdown.active > .dropdown-menu {
+    display: block !important;  
+}
+
+.dropdown-item.active {
+    color: white !important;
+    background: #0000004a !important;
+}
+
+.nav-item .nav-link.active{
+    background: #0000004a !important;
+    color: white !important;
+
+}
+label {
+    margin-bottom: 6px;
+  }

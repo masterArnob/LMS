@@ -256,7 +256,7 @@
   
 
     <!-- Vite-bundled admin.js -->
-    @vite(['resources/js/admin.js'])
+    @vite(['resources/js/admin.js', 'resources/css/admin.css'])
 
 
 

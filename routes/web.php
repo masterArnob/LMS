@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::post('logo-settings/update', [SettingsController::class, 'logoSettingsUpdate'])->name('logo-settings.update');
     Route::get('site-settings/logo-settings', [SettingsController::class, 'logoSettings'])->name('logo-settings.index');
     Route::post('general-settings/update', [SettingsController::class, 'generalSettingsUpdate'])->name('general-settings.update');
     Route::get('general-settings', [SettingsController::class, 'generalSettings'])->name('general-settings.index');
