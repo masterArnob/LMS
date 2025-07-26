@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PaymentSettingsController;
+use App\Http\Controllers\Admin\PayoutGatewayController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TopBarSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
@@ -74,6 +75,7 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 
 
 
+    Route::resource('payout', PayoutGatewayController::class);
     Route::get('smtp-settings', [SettingsController::class, 'smtpSettings'])->name('smtp-settings.index');
     Route::post('comission-settings/update', [SettingsController::class, 'comissionSettingsUpdate'])->name('comission-settings.update');
     Route::get('comission-settings', [SettingsController::class, 'comissionSettings'])->name('comission-settings.index');
