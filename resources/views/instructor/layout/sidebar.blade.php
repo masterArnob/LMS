@@ -23,6 +23,14 @@
                 Courses
             </a>
         </li>
+           <li>
+            <a href="{{ route('instructor.orders.index') }}">
+                <div class="img">
+                    <img src="{{ asset('uploads/default-files/dash_icon_5.png') }}" alt="icon" class="img-fluid w-100">
+                </div>
+                Orders
+            </a>
+        </li>
         <li>
             <a href="dashboard_review.html">
                 <div class="img">
@@ -31,14 +39,7 @@
                 Reviews
             </a>
         </li>
-        <li>
-            <a href="dashboard_order.html">
-                <div class="img">
-                    <img src="images/dash_icon_5.png" alt="icon" class="img-fluid w-100">
-                </div>
-                Orders
-            </a>
-        </li>
+     
         <li>
             <a href="dashboard_student.html">
                 <div class="img">

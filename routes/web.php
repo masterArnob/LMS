@@ -27,6 +27,7 @@ use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Instructor\CourseContentController;
 use App\Http\Controllers\Instructor\CourseController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorOrderController;
 use App\Http\Controllers\Instructor\InstructorProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\StudentDashboardController;
@@ -126,6 +127,7 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'], function () {
 
 
+    Route::get('orders', [InstructorOrderController::class, 'index'])->name('orders.index');
 
 
      Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
