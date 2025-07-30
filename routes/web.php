@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminInstructorPayoutController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\becomeInstructorSectionController;
 use App\Http\Controllers\Admin\BrandController;
@@ -76,6 +77,9 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 
 
 
+    Route::put('payout-request/update/{id}', [AdminInstructorPayoutController::class, 'update'])->name('payout-request.update');
+    Route::get('payout-request/edit/{id}', [AdminInstructorPayoutController::class, 'edit'])->name('payout-request.edit');
+    Route::get('payout-request', [AdminInstructorPayoutController::class, 'index'])->name('payout-request.index');
     Route::resource('payout', PayoutGatewayController::class);
     Route::get('smtp-settings', [SettingsController::class, 'smtpSettings'])->name('smtp-settings.index');
     Route::post('comission-settings/update', [SettingsController::class, 'comissionSettingsUpdate'])->name('comission-settings.update');
@@ -130,6 +134,7 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'], function () {
 
 
+    Route::post('withdraw/store', [InstructorWithdrawController::class, 'store'])->name('withdraw.store');
     Route::get('withdraw/create', [InstructorWithdrawController::class, 'create'])->name('withdraw.create');
     Route::get('withdraw', [InstructorWithdrawController::class, 'index'])->name('withdraw.index');
     Route::get('orders', [InstructorOrderController::class, 'index'])->name('orders.index');

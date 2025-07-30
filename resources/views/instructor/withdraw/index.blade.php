@@ -59,25 +59,30 @@
                                                         #
                                                     </th>
                                                     <th class="sale">
-                                                        Title
+                                                        Amount
                                                     </th>
+
+                                                         <th class="sale">
+                                                        Payment Method
+                                                    </th>
+
+
+                                               
+
                                                      <th class="sale">
-                                                        Customer
+                                                        Status
                                                     </th>
-                                                    <th class="status">
-                                                        Price
+
+
+                                                         <th class="sale">
+                                                        Created At
                                                     </th>
-                                                    <th class="status">
-                                                        Commission Rate
-                                                    </th>
-                                                    <th class="action">
-                                                        Earnings
-                                                    </th>
+                                              
                                                 </tr>
 
 
                                
-                                                {{-- @forelse ($orders as $order)
+                                              @forelse ($withdraws as $withdraw)
                                                     <tr>
                                                       
                                                          <td class="details">
@@ -85,15 +90,18 @@
                                                           {{ $loop->iteration }}
 
                                                         </td>
-                                                        <td class="details">
-                                                          
-                                                            <a class="title" href="{{ route('course.details', $order->course->slug) }}">{{ $order->course->title }}</a>
-
-                                                        </td>
+                                       
 
                                                             <td class="details">
                                                           
-                                                            <a class="title" href="javascript:;">{{ $order->order->user->name }}</a>
+                                                            <a class="title" href="javascript:;">{{ config('settings.currency_icon') }}{{ $withdraw->amount }}</a>
+
+                                                        </td>
+
+
+                                                               <td class="details">
+                                                          
+                                                            <a class="title" href="javascript:;">{{ $withdraw->payoutGateway->name }}</a>
 
                                                         </td>
 
@@ -101,40 +109,47 @@
 
                                                            <td class="details">
                                                           
-                                                            <a class="title" href="javascript:;">{{ config('settings.currency_icon') }}{{ $order->price }}</a>
+                                                            <a class="title" href="javascript:;">
+                                                                @if ($withdraw->status == 'pending')
+                                                                    <span class="badge bg-warning">Pending</span>
+                                                                    
+                                                                @elseif($withdraw->status == 'approved')
+                                                                    <span class="badge bg-success">Approved</span>
+                                                                @else
+                                                                    <span class="badge bg-danger">Rejected</span>
+                                                                @endif
+                                                            </a>
+
+                                                        </td>
+
+
+                                                              <td class="details">
+
+                                                            <a class="title" href="javascript:;">{{ date('d M Y', strtotime($withdraw->created_at)) }}</a>
 
                                                         </td>
 
 
 
-                                                                 <td class="details">
-                                                          
-                                                            <a class="title" href="javascript:;">{{ $order->commission_rate ?? 0 }}%</a>
-
-                                                        </td>
+                    
 
 
-
-                                                                    <td class="details">
-                                                          
-                                                            <a class="title" href="javascript:;">{{ config('settings.currency_icon') }}{{ calculateComission($order->price, $order->commission_rate) }}</a>
-
-                                                        </td>
+                                                      
                                                    
                                                
                                                     </tr>
                                                 @empty
                                                     No Data Available
-                                                @endforelse --}}
+                                                @endforelse 
                                  
                                             </tbody>
                                         </table>
                                         <div class="col-xl-12">
-                                           {{-- 
-                                            @if ($orders->hasPages())
-                                                {{ $orders->withQueryString()->links() }}
+                                     
+                                            @if ($withdraws->hasPages())
+                                                {{ $withdraws->withQueryString()->links() }}
                                             @endif
-                                           --}}
+                                     
                                         </div>
                                     </div>
                                 </div>

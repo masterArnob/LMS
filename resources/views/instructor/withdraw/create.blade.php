@@ -95,7 +95,7 @@
 
 
 
-                                <form action="" method="POST">
+                                <form action="{{ route('instructor.withdraw.store') }}" method="POST">
 
                                     @csrf
                                     <div class="row">
@@ -113,7 +113,7 @@
                                         <div class="col-xl-6 col-md-6">
                                             <div class="wsus__dash_pro_single">
                                                 <label>Payment Method *</label>
-                                                <select class="form-control" name="payment_method" required>
+                                                <select class="form-control" name="payout_gateway_id" required>
                                                     <option value="">Select Payment Method</option>
                                                     @forelse ($gateways as $gateway)
                                                         <option value="{{ $gateway->id }}">{{ $gateway->name }}</option>

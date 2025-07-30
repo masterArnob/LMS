@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('withdraws', function (Blueprint $table) {
              $table->id();
             $table->foreignId('instructor_id')->constrained('users');
+            $table->foreignId('payout_gateway_id')->constrained('payout_gateways');
             $table->double('amount');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string('transaction_id')->nullable();
