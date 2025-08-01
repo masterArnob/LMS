@@ -11,6 +11,7 @@ use App\Models\CourseCategory;
 use App\Models\Features;
 use App\Models\HeroSection;
 use App\Models\NewsLetter;
+use App\Models\Testimonials;
 use App\Models\VideoSection;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,9 @@ class HomeController extends Controller
         ->orderBy('id', 'DESC')
         ->get();
 
+        $testimonials = Testimonials::where('status', 'active')
+            ->orderBy('id', 'DESC')
+            ->get();
        
 
         return view('frontend.home', compact(
@@ -39,6 +43,7 @@ class HomeController extends Controller
             'becomeInstructorSection',
             'videoSection',
             'brands',
+            'testimonials',
         ));
     }
 

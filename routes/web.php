@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PaymentSettingsController;
 use App\Http\Controllers\Admin\PayoutGatewayController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\TestimonialsController;
 use App\Http\Controllers\Admin\TopBarSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Frontend\CartController;
@@ -77,6 +78,7 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 
 
 
+    Route::resource('testimonials', TestimonialsController::class);
     Route::put('payout-request/update/{id}', [AdminInstructorPayoutController::class, 'update'])->name('payout-request.update');
     Route::get('payout-request/edit/{id}', [AdminInstructorPayoutController::class, 'edit'])->name('payout-request.edit');
     Route::get('payout-request', [AdminInstructorPayoutController::class, 'index'])->name('payout-request.index');
