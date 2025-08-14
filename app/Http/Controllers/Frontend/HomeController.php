@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AboutPage;
 use App\Models\AboutSection;
 use App\Models\becomeInstructorSection;
 use App\Models\Brand;
@@ -93,5 +94,15 @@ class HomeController extends Controller
         ->where('status', 'active')
         ->firstOrFail();
         return view('frontend.pages.custom-page.index', compact('page'));
+    }
+
+
+    public function about(){
+        $about = AboutPage::first();
+        $aboutSection = AboutSection::first();
+          $testimonials = Testimonials::where('status', 'active')
+            ->orderBy('id', 'DESC')
+            ->get();
+        return view('frontend.pages.about.index', compact('about', 'aboutSection', 'testimonials'));
     }
 }

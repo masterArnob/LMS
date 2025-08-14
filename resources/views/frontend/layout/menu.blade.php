@@ -39,7 +39,7 @@
                     <a class="nav-link active" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About Us</a>
+                    <a class="nav-link" href="{{ route('about') }}">About Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('course.list') }}">Courses</a>
@@ -87,6 +87,7 @@
                         ->orderBy('id', 'DESC')
                         ->get();
                 @endphp
+
                 @forelse ($pages as $page)
                        <li class="nav-item">
                     <a class="nav-link" href="{{ route('page', $page->slug) }}">{{ $page->title }}</a>
@@ -205,7 +206,7 @@
                                 <li class="mobile_dropdown">
                                     <a href="#">pages</a>
                                     <ul class="inner_menu">
-                                        <li><a href="about.html">about us</a></li>
+                                        <li><a href="">about us</a></li>
                                         <li><a href="category.html">Categories</a></li>
                                         <li><a href="cart_view.html">cart view</a></li>
                                         <li><a href="checkout.html">checkout</a></li>

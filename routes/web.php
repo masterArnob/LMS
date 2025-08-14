@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutSectionController;
+use App\Http\Controllers\Admin\AdminAboutPageController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminInstructorPayoutController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -54,6 +55,8 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('page/{slug}', [HomeController::class, 'CustomPage'])->name('page');
+Route::get('about', [HomeController::class, 'about'])->name('about');
+
 
 Route::post('subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
 Route::get('course-list', [HomeController::class, 'courseList'])->name('course.list');
@@ -85,6 +88,8 @@ Route::middleware('auth')->group(function () {
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
 
+    Route::post('about-page/store', [AdminAboutPageController::class, 'store'])->name('about-page.store');
+    Route::get('about-page', [AdminAboutPageController::class, 'index'])->name('about-page.index');
 
 
     Route::resource('custom-page-builder', CustomPageBuilderController::class);
