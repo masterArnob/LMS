@@ -8,6 +8,7 @@ use App\Models\becomeInstructorSection;
 use App\Models\Brand;
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\CustomPageBuilder;
 use App\Models\Features;
 use App\Models\Footer;
 use App\Models\HeroSection;
@@ -83,5 +84,14 @@ class HomeController extends Controller
         $courseCount = Course::where(['status' => 'active', 'is_approved' => 'approved'])
         ->count();
         return view('frontend.pages.course-details', compact('course', 'courseCount'));
+    }
+
+
+
+    public function CustomPage($slug){
+        $page = CustomPageBuilder::where('slug', $slug)
+        ->where('status', 'active')
+        ->firstOrFail();
+        return view('frontend.pages.custom-page.index', compact('page'));
     }
 }

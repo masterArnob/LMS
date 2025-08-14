@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CourseLevelController;
 use App\Http\Controllers\Admin\CourseSubCategoryController;
+use App\Http\Controllers\Admin\CustomPageBuilderController;
 use App\Http\Controllers\Admin\FeaturesController;
 use App\Http\Controllers\Admin\FooterColOneController;
 use App\Http\Controllers\Admin\FooterColTwoController;
@@ -51,6 +52,9 @@ Route::get('/', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('page/{slug}', [HomeController::class, 'CustomPage'])->name('page');
+
 Route::post('subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
 Route::get('course-list', [HomeController::class, 'courseList'])->name('course.list');
 Route::get('course-details/{slug}', [HomeController::class, 'courseDetails'])->name('course.details');
@@ -83,6 +87,7 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 
 
 
+    Route::resource('custom-page-builder', CustomPageBuilderController::class);
     Route::resource('footer-social-links', SocialLinksController::class);
     Route::resource('footer-col-two', FooterColTwoController::class);
     Route::resource('footer-col-one', FooterColOneController::class);

@@ -79,6 +79,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">contact us</a>
                 </li>
+
+
+                @php
+                    $pages = App\Models\CustomPageBuilder::where('status', 'active')
+                        ->where('show_at_nav', 'yes')
+                        ->orderBy('id', 'DESC')
+                        ->get();
+                @endphp
+                @forelse ($pages as $page)
+                       <li class="nav-item">
+                    <a class="nav-link" href="{{ route('page', $page->slug) }}">{{ $page->title }}</a>
+                </li>
+                @empty
+                    
+                @endforelse
             </ul>
 
             <div class="right_menu">
