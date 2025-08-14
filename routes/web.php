@@ -40,6 +40,7 @@ use App\Http\Controllers\Instructor\InstructorOrderController;
 use App\Http\Controllers\Instructor\InstructorProfileController;
 use App\Http\Controllers\Instructor\InstructorWithdrawController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Student\MyCourseController;
 use App\Http\Controllers\Student\StudentDashboardController;
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\User\UserProfileController;
@@ -206,6 +207,10 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:instructor'], 'pr
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
 
+
+
+    Route::get('course-player/{slug}', [MyCourseController::class, 'coursePlayer'])->name('course-player.index');
+    Route::get('my-courses', [MyCourseController::class, 'myCourses'])->name('my-courses.index');
 
 
     Route::get('order/success', [OrderController::class, 'success'])->name('order.success');
