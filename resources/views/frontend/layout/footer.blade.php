@@ -1,3 +1,10 @@
+@php
+    $footer = \App\Models\Footer::first();
+    $links = \App\Models\SocialLinks::where('status', 'active')->get();
+    $ones =   \App\Models\FooterColOne::where('status', 'active')->get();
+    $twos =   \App\Models\FooterColTwo::where('status', 'active')->get();
+@endphp
+@if (!empty($footer))
     <footer class="footer_3" style="background: url(images/footer_3_bg.jpg);">
         <div class="footer_3_overlay pt_120 xs_pt_100">
             <div class="wsus__footer_bottom">
@@ -8,63 +15,78 @@
                                 <a class="logo" href="index.html">
                                     <img src="images/footer_logo.png" alt="EduCore" class="img-fluid">
                                 </a>
-                                <p>Nunc in sollicitudin diam, ut bibendum malesuada sodales porttitor.</p>
+                                <p>{{ @$footer->desc }}</p>
                                 <h2>Follow Us On</h2>
                                 <ul class="d-flex flex-wrap">
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    @forelse ($links as $link)
+                                          <li><a href="{{ $link->url }}" target="_blank">
+                                    <img src="{{ asset($link->icon) }}" alt="" style="width: 20px !important; height: 20px !important;">
+                                </a></li>
+                                    @empty
+                                        Please add social links in the admin panel.
+                                    @endforelse
+                                  
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6 col-md-3 wow fadeInUp">
                             <div class="wsus__footer_link">
-                                <h2>Courses</h2>
+                                <h2>Help Links</h2>
                                 <ul>
-                                    <li><a href="#">Life Coach</a></li>
-                                    <li><a href="#">Business Coach</a></li>
-                                    <li><a href="#">Health Coach</a></li>
-                                    <li><a href="#">Development</a></li>
-                                    <li><a href="#">SEO Optimize</a></li>
+                                    @forelse ($ones as $one)
+                                          <li><a href="{{ $one->url }}">{{ $one->title }}</a></li>
+                                    @empty
+                                        Please add help links in the admin panel.
+                                    @endforelse
+                         
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6 col-md-3 wow fadeInUp">
                             <div class="wsus__footer_link">
-                                <h2>Programs</h2>
+                                <h2>More Links</h2>
                                 <ul>
-                                    <li><a href="#">The Arts</a></li>
-                                    <li><a href="#">Human Sciences</a></li>
-                                    <li><a href="#">Economics</a></li>
-                                    <li><a href="#">Natural Sciences</a></li>
-                                    <li><a href="#">Business</a></li>
+                                   @forelse ($twos as $two)
+                                          <li><a href="{{ $two->url }}">{{ $two->title }}</a></li>
+                                    @empty
+                                        Please add more links in the admin panel.
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 wow fadeInUp">
                             <div class="wsus__footer_3_subscribe">
                                 <h3>Subscribe Our Newsletter</h3>
-                                <form action="#">
-                                    <input type="text" placeholder="Enter Your Email">
-                                    <button type="submit" class="common_btn">Subscribe</button>
-                                </form>
+                                 <form class="subs">
+                            <input type="email" placeholder="Your email address..." name="email" required>
+                            <button type="submit" class="common_btn">Subscribe</button>
+                        </form>
                                 <ul>
                                     <li>
+                                    <div class="icon">
+                                        <img src="{{ asset('uploads/default-files/mail_icon_white.png') }}" alt="Call" class="img-fluid">
+                                    </div>
+                                    <div class="text">
+                                        <h4>Email us:</h4>
+                                        <a href="mailto:{{ @$footer->email }}">{{ @$footer->email }}</a>
+                                    </div>
+                                </li>
+                                    <li>
                                         <div class="icon">
-                                            <img src="images/call_icon_white.png" alt="Call" class="img-fluid">
+                                            <img src="{{ asset('uploads/default-files/call_icon_white.png') }}" alt="Call" class="img-fluid">
                                         </div>
                                         <div class="text">
                                             <h4>Call us:</h4>
-                                            <a href="mailto:example@gmail.com">example@gmail.com</a>
+                                            <a href="tel:{{ @$footer->phone }}">{{ @$footer->phone }}</a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="icon">
-                                            <img src="images/location_icon_white.png" alt="Call" class="img-fluid">
+                                            <img src="{{ asset('uploads/default-files/location_icon_white.png') }}" alt="Location" class="img-fluid">
                                         </div>
                                         <div class="text">
                                             <h4>Office:</h4>
-                                            <p>25-02 44th Queens, NY 3645, United States</p>
+                                            <p>{{ @$footer->address }}</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -78,7 +100,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="wsus__footer_copyright_text">
-                                <p>Copyright © 2024 All Rights Reserved by EduCore Education</p>
+                                <p>{{ @$footer->copyright }}</p>
                                 <ul>
                                     <li><a href="#">Privacy Policy</a></li>
                                     <li><a href="#">Term of Service</a></li>
@@ -89,4 +111,12 @@
                 </div>
             </div>
         </div>
+    </footer>    
+@else
+    <footer class="footer_3">
+        <div class="container">
+            <p>No footer data available.</p>
+        </div>
     </footer>
+
+@endif

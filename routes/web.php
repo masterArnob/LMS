@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CourseLevelController;
 use App\Http\Controllers\Admin\CourseSubCategoryController;
 use App\Http\Controllers\Admin\FeaturesController;
+use App\Http\Controllers\Admin\FooterColOneController;
+use App\Http\Controllers\Admin\FooterColTwoController;
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\NewsLetterController;
@@ -19,6 +22,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PaymentSettingsController;
 use App\Http\Controllers\Admin\PayoutGatewayController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\SocialLinksController;
 use App\Http\Controllers\Admin\TestimonialsController;
 use App\Http\Controllers\Admin\TopBarSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
@@ -78,6 +82,12 @@ Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix'
 
 
 
+
+    Route::resource('footer-social-links', SocialLinksController::class);
+    Route::resource('footer-col-two', FooterColTwoController::class);
+    Route::resource('footer-col-one', FooterColOneController::class);
+    Route::post('footer/info', [FooterController::class, 'storeInfo'])->name('footer-info.store');
+    Route::get('footer', [FooterController::class, 'index'])->name('footer.index');
     Route::resource('testimonials', TestimonialsController::class);
     Route::put('payout-request/update/{id}', [AdminInstructorPayoutController::class, 'update'])->name('payout-request.update');
     Route::get('payout-request/edit/{id}', [AdminInstructorPayoutController::class, 'edit'])->name('payout-request.edit');

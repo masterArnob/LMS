@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Features;
+use App\Models\Footer;
 use App\Models\HeroSection;
 use App\Models\NewsLetter;
 use App\Models\Testimonials;
@@ -34,6 +35,7 @@ class HomeController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
        
+     
 
         return view('frontend.home', compact(
             'hero',
@@ -44,6 +46,7 @@ class HomeController extends Controller
             'videoSection',
             'brands',
             'testimonials',
+       
         ));
     }
 
