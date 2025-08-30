@@ -10,6 +10,8 @@ use App\Models\Brand;
 use App\Models\ContactUsPage;
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\CourseLanguage;
+use App\Models\CourseLevel;
 use App\Models\CustomPageBuilder;
 use App\Models\Features;
 use App\Models\Footer;
@@ -71,13 +73,39 @@ class HomeController extends Controller
 
 
 
-    public function courseList(){
+    public function courseList(Request $request){
         $courses = Course::with(['instructor', 'lessons'])
         ->where(['status' => 'active', 'is_approved' => 'approved'])
+        ->when($request->has('search') && $request->filled('search'), function($query) use ($request){
+            $query->where('title', 'like', '%'.$request->search.'%')
+            ->orWhere('description', 'like', '%'.$request->search.'%');
+        })
+        ->when($request->has('category') && $request->filled('category'), function($query) use ($request){
+            $query->whereIn('category_id', $request->category);
+        })
+        ->when($request->has('level') && $request->filled('level'), function($query) use ($request){
+            $query->whereIn('course_level_id', $request->level);
+        })
+        ->when($request->has('lang') && $request->filled('lang'), function($query) use ($request){
+            $query->whereIn('course_language_id', $request->lang);
+        })
         ->orderBy('id', 'DESC')
         ->get();
        // dd($courses);
-        return view('frontend.pages.course-list', compact('courses'));
+
+       $categories = CourseCategory::where('status', 'active')
+       ->orderBy('id', 'DESC')
+       ->get();
+
+       $levels = CourseLevel::where('status', 'active')
+       ->orderby('id', 'DESC')
+       ->get();
+
+       $langs = CourseLanguage::where('status', 'active')
+       ->orderBy('id', 'DESC')
+       ->get();
+
+        return view('frontend.pages.course-list', compact('courses', 'categories', 'levels', 'langs'));
     }
 
 

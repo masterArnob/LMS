@@ -131,8 +131,8 @@
         </div>
     </nav>
     <div class="wsus__menu_3_search_area">
-        <form action="#">
-            <input type="text" placeholder="Search School, Online.....">
+        <form action="{{ route('course.list') }}">
+            <input type="text" placeholder="Search School, Online....." name="search" value="{{ request('search') ?? '' }}">
             <button class="common_btn" type="submit">Search</button>
             <span class="close_search"><i class="far fa-times"></i></span>
         </form>

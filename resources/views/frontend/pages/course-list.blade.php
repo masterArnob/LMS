@@ -33,354 +33,81 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-8 order-2 order-lg-1 wow fadeInLeft">
                     <div class="wsus__sidebar">
-                        <form action="#">
+                        <form action="{{ route('course.list') }}">
                             <div class="wsus__sidebar_search">
-                                <input type="text" placeholder="Search Course">
+                                <input type="text" placeholder="Search Course" name="search" value="{{ request('search') ?? '' }}" required> 
                                 <button type="submit">
-                                    <img src="images/search_icon.png" alt="Search" class="img-fluid">
+                                    <img src="{{ asset('uploads/default-files/search_icon.png') }}" alt="Search" class="img-fluid">
                                 </button>
                             </div>
+                        </form>
 
-                            <div class="wsus__sidebar_category">
+                           
+                        <form action="{{ route('course.list') }}" method="GET">
+                               <div class="wsus__sidebar_course_lavel">
                                 <h3>Categories</h3>
-                                <ul class="categoty_list">
-                                    <li class="">Bundle Courses
-                                        <div class="wsus__sidebar_sub_category">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc1">
-                                                <label class="form-check-label" for="flexCheckDefaultc1">
-                                                    Game developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc2">
-                                                <label class="form-check-label" for="flexCheckDefaultc2">
-                                                    Apple
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc3">
-                                                <label class="form-check-label" for="flexCheckDefaultc3">
-                                                    Career developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc44">
-                                                <label class="form-check-label" for="flexCheckDefaultc44">
-                                                    Communication
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>Development
-                                        <div class="wsus__sidebar_sub_category">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc5">
-                                                <label class="form-check-label" for="flexCheckDefaultc5">
-                                                    Game developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc6">
-                                                <label class="form-check-label" for="flexCheckDefaultc6">
-                                                    Apple
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc7">
-                                                <label class="form-check-label" for="flexCheckDefaultc7">
-                                                    Career developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc4">
-                                                <label class="form-check-label" for="flexCheckDefaultc4">
-                                                    Communication
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>Live class
-                                        <div class="wsus__sidebar_sub_category">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc9">
-                                                <label class="form-check-label" for="flexCheckDefaultc9">
-                                                    Game developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc10">
-                                                <label class="form-check-label" for="flexCheckDefaultc10">
-                                                    Apple
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc11">
-                                                <label class="form-check-label" for="flexCheckDefaultc11">
-                                                    Career developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc12">
-                                                <label class="form-check-label" for="flexCheckDefaultc12">
-                                                    Communication
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>IT & Software
-                                        <div class="wsus__sidebar_sub_category">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc13">
-                                                <label class="form-check-label" for="flexCheckDefaultc13">
-                                                    Game developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc14">
-                                                <label class="form-check-label" for="flexCheckDefaultc14">
-                                                    Apple
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc15">
-                                                <label class="form-check-label" for="flexCheckDefaultc15">
-                                                    Career developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc66">
-                                                <label class="form-check-label" for="flexCheckDefaultc66">
-                                                    Communication
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>Health & Fitness
-                                        <div class="wsus__sidebar_sub_category">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc17">
-                                                <label class="form-check-label" for="flexCheckDefaultc17">
-                                                    Game developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc18">
-                                                <label class="form-check-label" for="flexCheckDefaultc18">
-                                                    Apple
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc19">
-                                                <label class="form-check-label" for="flexCheckDefaultc19">
-                                                    Career developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc20">
-                                                <label class="form-check-label" for="flexCheckDefaultc20">
-                                                    Communication
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>Data Science
-                                        <div class="wsus__sidebar_sub_category">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc21">
-                                                <label class="form-check-label" for="flexCheckDefaultc21">
-                                                    Game developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc22">
-                                                <label class="form-check-label" for="flexCheckDefaultc22">
-                                                    Apple
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc23">
-                                                <label class="form-check-label" for="flexCheckDefaultc23">
-                                                    Career developments
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefaultc24">
-                                                <label class="form-check-label" for="flexCheckDefaultc24">
-                                                    Communication
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+
+                                @forelse ($categories as $category)
+                                      <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                       @checked(request('category') && in_array($category->id, request('category')))  id="category-id-{{ $category->id }}" name="category[]">
+                                    <label class="form-check-label" for="category-id-{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </label>
+                                </div>
+                                @empty
+                                    No category available
+                                @endforelse
+                              
+                              
                             </div>
+
+
 
                             <div class="wsus__sidebar_course_lavel">
                                 <h3>Difficulty Level</h3>
+                              
+                            @forelse ($levels as $level)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Higher
+                                    <input class="form-check-input" type="checkbox" value="{{ $level->id }}"
+                                     @checked(request('level') && in_array($level->id, request('level'))) id="level-id-{{ $level->id }}" name="level[]">
+                                    <label class="form-check-label" for="level-id-{{ $level->id }}">
+                                        {{ $level->name }}
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefault2">
-                                    <label class="form-check-label" for="flexCheckDefault2">
-                                        Medium
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefault3">
-                                    <label class="form-check-label" for="flexCheckDefault3">
-                                        Lowest
-                                    </label>
-                                </div>
+                                </div>  
+                            @empty
+                                No level is available
+                            @endforelse
                             </div>
 
-                            <div class="wsus__sidebar_course_lavel rating">
-                                <h3>Rating</h3>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultr1">
-                                    <label class="form-check-label" for="flexCheckDefaultr1">
-                                        <i class="fas fa-star"></i> 5 star
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultr2">
-                                    <label class="form-check-label" for="flexCheckDefaultr2">
-                                        <i class="fas fa-star"></i> 4 star or above
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultr3">
-                                    <label class="form-check-label" for="flexCheckDefaultr3">
-                                        <i class="fas fa-star"></i> 3 star or above
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultr4">
-                                    <label class="form-check-label" for="flexCheckDefaultr4">
-                                        <i class="fas fa-star"></i> 2 star or above
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultr5">
-                                    <label class="form-check-label" for="flexCheckDefaultr5">
-                                        <i class="fas fa-star"></i> 1 star or above
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="wsus__sidebar_course_lavel duration">
-                                <h3>Duration</h3>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultd1">
-                                    <label class="form-check-label" for="flexCheckDefaultd1">
-                                        Less Than 24 Hours
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultd2">
-                                    <label class="form-check-label" for="flexCheckDefaultd2">
-                                        24 to 36 Hours
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultd3">
-                                    <label class="form-check-label" for="flexCheckDefaultd3">
-                                        36 to 72 Hours
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaultd4">
-                                    <label class="form-check-label" for="flexCheckDefaultd4">
-                                        Above 70 Hours
-                                    </label>
-                                </div>
-                            </div>
+                         
 
                             <div class="wsus__sidebar_course_lavel duration">
                                 <h3>Language</h3>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaulte1">
-                                    <label class="form-check-label" for="flexCheckDefaulte1">
-                                        Bangla
+                            
+                             
+                                @forelse ($langs as $lang)
+                                        <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $lang->id }}"
+                                      @checked(request('lang') && in_array($lang->id, request('lang')))  id="langs-id-{{ $lang->id }}" name="lang[]">
+                                    <label class="form-check-label" for="langs-id-{{ $lang->id }}">
+                                        {{ $lang->name }}
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaulte2">
-                                    <label class="form-check-label" for="flexCheckDefaulte2">
-                                        English
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefaulte3">
-                                    <label class="form-check-label" for="flexCheckDefaulte3">
-                                        Hindi
-                                    </label>
-                                </div>
+                                @empty
+                                    No Data Available
+                                @endforelse
                             </div>
 
-                            <div class="wsus__sidebar_rating">
-                                <h3>Price Range</h3>
-                                <div class="range_slider"></div>
-                            </div>
+                        
+                            <br>
+                            <button type="submit" class="common_btn">Filter</button>
 
                         </form>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-8 order-lg-1">
-                    <div class="wsus__page_courses_header wow fadeInUp">
-                        <p>Showing <span>1-9</span> Of <span>62</span> Results</p>
-                        <form action="#">
-                            <p>Sort-by:</p>
-                            <select class="select_js">
-                                <option value="">Regular</option>
-                                <option value="">Top Rated</option>
-                                <option value="">Popular Courses</option>
-                                <option value="">Recent Courses</option>
-                            </select>
-                        </form>
-                    </div>
+                   
                     <div class="row">
 
 
