@@ -7,6 +7,7 @@ use App\Models\AboutPage;
 use App\Models\AboutSection;
 use App\Models\becomeInstructorSection;
 use App\Models\Brand;
+use App\Models\ContactUsPage;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\CustomPageBuilder;
@@ -40,6 +41,7 @@ class HomeController extends Controller
 
 
         $latest = LatestCourse::first();  
+        
 
         return view('frontend.home', compact(
             'hero',
@@ -106,5 +108,12 @@ class HomeController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
         return view('frontend.pages.about.index', compact('about', 'aboutSection', 'testimonials'));
+    }
+
+
+
+    public function contactPage(){
+        $page = ContactUsPage::first();
+        return view('frontend.pages.contact.index', compact('page'));
     }
 }

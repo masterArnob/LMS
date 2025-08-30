@@ -81,7 +81,7 @@
                 --}}
               
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">contact us</a>
+                    <a class="nav-link" href="{{ route('contact-page') }}">contact us</a>
                 </li>
 
 

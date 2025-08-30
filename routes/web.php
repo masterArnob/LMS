@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\AdminAboutPageController;
+use App\Http\Controllers\Admin\AdminContactUsPageController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminInstructorPayoutController;
 use App\Http\Controllers\Admin\AdminLatestCourseController;
@@ -56,6 +57,8 @@ Route::get('/', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+Route::get('contact-page', [HomeController::class, 'contactPage'])->name('contact-page');
 Route::get('page/{slug}', [HomeController::class, 'CustomPage'])->name('page');
 Route::get('about', [HomeController::class, 'about'])->name('about');
 
@@ -89,6 +92,8 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+
+    Route::resource('contact-us-page', AdminContactUsPageController::class);
     Route::resource('latest-course', AdminLatestCourseController::class);
 
     Route::post('about-page/store', [AdminAboutPageController::class, 'store'])->name('about-page.store');
