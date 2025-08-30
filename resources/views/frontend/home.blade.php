@@ -108,7 +108,9 @@
     <!--===========================
         QUALITY COURSES START
     ============================-->
+      {{-- 
        @include('frontend.sections.quality-course')
+      --}}
  
     <!--===========================
         QUALITY COURSES END
@@ -128,7 +130,9 @@
     <!--===========================
         BLOG 4 START
     ============================-->
-      @include('frontend.sections.blog')
+    {{-- 
+      @include('frontend.sections.blog') 
+      --}}
 
     <!--===========================
         BLOG 4 END

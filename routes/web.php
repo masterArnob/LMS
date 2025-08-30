@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\AdminAboutPageController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminInstructorPayoutController;
+use App\Http\Controllers\Admin\AdminLatestCourseController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\becomeInstructorSectionController;
 use App\Http\Controllers\Admin\BrandController;
@@ -88,6 +89,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified', 'check_role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
+    Route::resource('latest-course', AdminLatestCourseController::class);
 
     Route::post('about-page/store', [AdminAboutPageController::class, 'store'])->name('about-page.store');
     Route::get('about-page', [AdminAboutPageController::class, 'index'])->name('about-page.index');

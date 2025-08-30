@@ -45,6 +45,7 @@
                     <a class="nav-link" href="{{ route('course.list') }}">Courses</a>
                
                 </li>
+                {{-- 
                 <li class="nav-item">
                     <a class="nav-link" href="#">pages <i class="far fa-angle-down"></i></a>
                     <ul class="droap_menu">
@@ -68,7 +69,8 @@
                         <li><a href="dashboard.html">Dashboard</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+
+                  <li class="nav-item">
                     <a class="nav-link" href="#">blog <i class="far fa-angle-down"></i></a>
                     <ul class="droap_menu">
                         <li><a href="blogs.html">blog grid view</a></li>
@@ -76,6 +78,8 @@
                         <li><a href="blog_details.html">blog details</a></li>
                     </ul>
                 </li>
+                --}}
+              
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">contact us</a>
                 </li>

@@ -189,7 +189,9 @@
     <!--===========================
         BLOG 4 START
     ============================-->
-    <section class="blog_4 mt_110 xs_mt_90 pt_120 xs_pt_100 pb_120 xs_pb_100">
+
+    {{-- 
+        <section class="blog_4 mt_110 xs_mt_90 pt_120 xs_pt_100 pb_120 xs_pb_100">
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 wow fadeInLeft">
@@ -295,6 +297,7 @@
             </div>
         </div>
     </section>
+     --}}
     <!--===========================
         BLOG 4 END
     ============================-->

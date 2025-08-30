@@ -13,6 +13,7 @@ use App\Models\CustomPageBuilder;
 use App\Models\Features;
 use App\Models\Footer;
 use App\Models\HeroSection;
+use App\Models\LatestCourse;
 use App\Models\NewsLetter;
 use App\Models\Testimonials;
 use App\Models\VideoSection;
@@ -36,8 +37,9 @@ class HomeController extends Controller
         $testimonials = Testimonials::where('status', 'active')
             ->orderBy('id', 'DESC')
             ->get();
-       
-     
+
+
+        $latest = LatestCourse::first();  
 
         return view('frontend.home', compact(
             'hero',
@@ -48,7 +50,7 @@ class HomeController extends Controller
             'videoSection',
             'brands',
             'testimonials',
-       
+            'latest'
         ));
     }
 
